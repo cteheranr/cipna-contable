@@ -1,0 +1,54 @@
+<div class="container">
+  <div class="container__login">
+    <section class="container__login__form">
+      <div class="container__login__form__logo-col">
+        <img src="asset/img/iena.png" alt="logo_school" />
+      </div>
+      <form class="container__login__form__content" [formGroup]="loginForm">
+        <h1 class="container__login__form__content__title span">CIPNA-Contable</h1>
+        <div class="container__login__form__content__inputs">
+          <div class="container__login__form__content__inputs__container-input">
+            <span class="material-symbols-outlined"> person </span>
+            <div class="container__login__form__content__inputs__container-input__username">
+              <input
+                class="container__login__form__content__inputs__container-input__username__input"
+                type="text"
+                formControlName="username"
+                placeholder=""
+              />
+              <label
+                class="container__login__form__content__inputs__container-input__username__label"
+              >
+                Correo electronico
+              </label>
+            </div>
+          </div>
+          <div class="container__login__form__content__inputs__container-input">
+            <span class="material-symbols-outlined icons"> lock </span>
+            <div class="container__login__form__content__inputs__container-input__password">
+              <input
+                class="container__login__form__content__inputs__container-input__password__input"
+                type="password"
+                formControlName="password"
+                placeholder=""
+              />
+              <label
+                class="container__login__form__content__inputs__container-input__password__label"
+              >
+                password
+              </label>
+              <span class="material-symbols-outlined icons-eyes">visibility </span>
+            </div>
+          </div>
+        </div>
+        <!-- @if(message){
+          <p class="error">{{message}}</p>
+        } -->
+        <button class="container__login__form__content__btn-login" type="button" (click)="login()">
+          INGRESAR
+        </button>
+      </form>
+    </section>
+    <section class="container__login__img"></section>
+  </div>
+</div>

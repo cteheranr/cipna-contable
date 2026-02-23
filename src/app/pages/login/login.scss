@@ -1,0 +1,174 @@
+input,
+button {
+  border: none;
+  outline: none;
+}
+
+.container {
+  display: grid;
+  align-items: center;
+  position: relative;
+  height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  &__background {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    object-position: center;
+  }
+  &__login {
+    max-width: 30rem;
+    min-width: 20rem;
+    position: relative;
+    background-color: hsla(0, 0%, 0%, 0.2);
+    border: 2px solid var(--white-color);
+    margin-inline: 1.5rem;
+    padding: 2.5rem 1.5rem;
+    border-radius: 1rem;
+    backdrop-filter: blur(8px);
+    &__form {
+      display: grid;
+      row-gap: 2.5rem;
+      &__logo-col {
+        display: grid;
+        justify-content: center;
+        img {
+          width: 10rem;
+        }
+      }
+      &__content {
+        display: grid;
+        row-gap: 20px;
+        color: var(--white-color);
+        &__title {
+          text-align: center;
+          font-size: var(--h1-font-size);
+          font-weight: var(--font-medium);
+          margin-bottom: 1.5rem;
+        }
+        &__inputs {
+          display: grid;
+          row-gap: 20px;
+          &__container-input {
+            display: grid;
+            grid-template-columns: max-content 1fr;
+            align-items: center;
+            column-gap: 0.75rem;
+            border-bottom: 2px solid var(--white-color);
+            &__username {
+              position: relative;
+              display: grid;
+              color: var(--white-color);
+              &__input {
+                width: 100%;
+                margin-block: 0.8rem;
+                background: none;
+                position: relative;
+                z-index: 1;
+                color: var(--white-color);
+              }
+              &__label {
+                position: absolute;
+                left: 0;
+                top: 13px;
+                font-weight: var(--font-medium);
+                transition: top 0.3s, font-size 0.3s;
+              }
+            }
+            &__password {
+              position: relative;
+              display: grid;
+              color: var(--white-color);
+              &__input {
+                width: 100%;
+                margin-block: 0.8rem;
+                background: none;
+                position: relative;
+                z-index: 1;
+                font-weight: 500;
+                color: var(--white-color);
+              }
+              &__label {
+                position: absolute;
+                left: 0;
+                top: 13px;
+                font-weight: var(--font-medium);
+                transition: top 0.3s, font-size 0.3s;
+              }
+            }
+          }
+        }
+        &__btn-login {
+          width: 100%;
+          padding: 1rem;
+          border-radius: 0.5rem;
+          background-color: var(--white-color);
+          font-weight: var(--font-medium);
+          cursor: pointer;
+          margin-bottom: 2rem;
+        }
+      }
+    }
+  }
+}
+
+.container__login__form__content__inputs__container-input:nth-child(2) input {
+  padding-right: 1.8rem;
+}
+
+.container__login__form__content__inputs__container-input__username__input:focus
+  + .container__login__form__content__inputs__container-input__username__label {
+  top: -12px;
+  font-size: var(--small-font-size);
+}
+
+.container__login__form__content__inputs__container-input__password__input:focus
+  + .container__login__form__content__inputs__container-input__password__label {
+  top: -12px;
+  font-size: var(--small-font-size);
+}
+
+.container__login__form__content__inputs__container-input__username__input:not(
+    :placeholder-shown
+  ).container__login__form__content__inputs__container-input__username__input:not(
+    :focus
+  )
+  + .container__login__form__content__inputs__container-input__username__label {
+  top: -12px;
+  font-size: var(--small-font-size);
+}
+
+.container__login__form__content__inputs__container-input__password__input:not(
+    :placeholder-shown
+  ).container__login__form__content__inputs__container-input__password__input:not(
+    :focus
+  )
+  + .container__login__form__content__inputs__container-input__password__label {
+  top: -12px;
+  font-size: var(--small-font-size);
+}
+
+.icons-eyes {
+  cursor: pointer;
+  position: absolute;
+  right: 0;
+  top: 18px;
+  z-index: 10;
+}
+
+span {
+  cursor: default;
+}
+
+.error {
+  color: red;
+  background: white;
+  text-align: center;
+  border-radius: 6px;
+  font-size: 13px;
+  font-weight: 500;
+  padding: 5px;
+}

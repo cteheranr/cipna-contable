@@ -1,0 +1,51 @@
+<nav class="sidebar">
+  <header>
+    <div class="image-text">
+      <span class="image">
+        <div class="text-content">
+          <p>CC</p>
+        </div>
+      </span>
+      <div class="text header-text">
+        <span class="name">Cipna</span>
+        <span class="name2">Contable</span>
+      </div>
+    </div>
+
+    <i class="bx bx-carets-left-right toggle"></i>
+  </header>
+
+  <div class="menu-bar">
+    <div class="menu">
+      <ul class="menu-link">
+        @for (item of navbarData; track item.label) {
+          <li class="nav-link">
+            <a href="#" [routerLink]="[item.routerLink]">
+              <i class="icon" [ngClass]="item.icon"></i>
+              <span class="text nav-text">{{item.label}}</span>
+            </a>
+          </li>
+        }
+      </ul>
+    </div>
+    <div class="bottom-content" (click)="logout()">
+      <li class="">
+        <a href="">
+          <i class="bx bx-arrow-out-left-square-half icon"></i>
+          <span class="text nav-text">Logout</span>
+        </a>
+      </li>
+      <li class="mode">
+        <div class="moon-sun">
+          <i class="bx bx-moon icon moon"></i>
+          <i class="bx bx-sun icon sun"></i>
+        </div>
+        <span class="mode-text text">Dark Mode</span>
+
+        <div class="toggle-switch">
+          <span class="switch" [ngClass]="{ dark: actClass }" (click)="activarClase()"></span>
+        </div>
+      </li>
+    </div>
+  </div>
+</nav>

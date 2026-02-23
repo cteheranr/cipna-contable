@@ -1,0 +1,136 @@
+h1, h2, h3, h4, h5 {
+    color: var(--text-color)
+}
+
+header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+
+  .btn-options {
+    display: flex;
+    align-items: center;
+    gap: 15px;
+
+    .btn {
+      font-weight: 600;
+      padding: 10px 20px;
+      border: none;
+      border-radius: 6px;
+      background: var(--primary-color);
+      color: var(--white-color);
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 10px;
+      transition: var(--tran-02);
+    }
+  }
+}
+
+.container-table {
+  margin-top: 20px;
+}
+
+.bx-edit:hover {
+  color: #dadd51
+}
+.bx-news:hover {
+  color: #246796
+}
+.bx-dollar-circle:hover {
+  color: #27683c
+}
+
+.paginacion {
+  margin-top: 20px;
+  padding-bottom: 20px;
+  display: flex;
+  gap: 20px;
+  align-items: center;
+
+  span {
+    color: var(--text-color)
+  }
+
+  button {
+    padding: 10px;
+    cursor: pointer;
+  }
+}
+
+.users {
+  width: 100%;
+  background: #f7f8fc;
+  border-radius: 10px;
+  overflow: hidden;
+
+  &__header {
+    display: grid;
+    grid-template-columns: 3fr 2fr 2fr 60px;
+    padding: 20px;
+    font-weight: 600;
+    color: #6b7280;
+    background: #f1f3f9;
+  }
+
+  &__row {
+    display: grid;
+    grid-template-columns: 3fr 2fr 2fr 60px;
+    align-items: center;
+    padding: 18px 20px;
+    border-bottom: 1px solid #eee;
+    background: white;
+  }
+
+  &__email {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+
+    .img {
+      width: 42px;
+      height: 42px;
+      border-radius: 50%;
+      object-fit: cover;
+      background-color: var(--primary-color);
+    }
+
+    .email {
+      font-weight: 500;
+      margin: 0;
+    }
+
+    .date {
+      font-size: 12px;
+      color: #9ca3af;
+    }
+  }
+
+  &__username {
+    font-weight: 500;
+  }
+
+  &__action {
+    cursor: pointer;
+    font-size:25px;
+  }
+}
+
+.badge {
+  padding: 6px 14px;
+  border-radius: 20px;
+  font-size: 13px;
+  font-weight: 500;
+
+  &.active {
+    background: #d1fae5;
+    color: #059669;
+  }
+
+  &.waiting {
+    background: #fef3c7;
+    color: #d97706;
+  }
+}

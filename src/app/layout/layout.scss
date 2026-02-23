@@ -1,0 +1,11 @@
+.layout {
+    background: var(--background-color);
+    height: 100vh;
+    display: flex;
+}
+
+.router {
+    transition: all .5s ease-in-out;
+    margin: 2rem 2rem 1.5rem 18rem;
+    width: 100%;
+}

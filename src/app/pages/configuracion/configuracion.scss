@@ -1,0 +1,27 @@
+.btn-container {
+    padding-top: 30px;
+    display: flex;
+    align-items: center;
+    justify-content: space-evenly;
+
+    .btn {
+        cursor: pointer;
+        background: var(--primary-color);
+        width: 130px;
+        height: 130px;
+        border-radius: 20px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        flex-direction: column;
+        gap: 15px;
+        color: var(--white-color);
+        i {
+            font-size: 30px;
+        }
+        span {
+            font-size: 14px;
+            font-weight: 500;
+        }
+    }
+}

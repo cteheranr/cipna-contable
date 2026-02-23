@@ -1,0 +1,61 @@
+<header>
+  <h2>ESTUDIANTES</h2>
+  <div class="btn-options">
+    <button class="btn">
+      <span><i class="bx bx-plus"></i></span> CREAR NUEVO
+    </button>
+  </div>
+</header>
+<div class="container-table">
+  <div class="users">
+    <div class="users__header">
+      <span>Nombre</span>
+      <span>identificacion</span>
+      <span>telefono</span>
+      <span></span>
+    </div>
+
+    @for (user of estudiantesPaginados; track user.id) {
+      <div class="users__row">
+        <div class="users__email">
+          <div class="img"></div>
+          <div>
+            <p class="email">{{ user.nombres }}</p>
+            <span class="date">{{ user.apellidos }}</span>
+          </div>
+        </div>
+
+        <div class="users__username">
+          {{ user.numeroDocumento }}
+        </div>
+
+        <div class="users__status">
+          @if (user.telefono == null || user.telefono == undefined) {
+            <span class="badge waiting"> No registra </span>
+          } @else {
+            <span class="badge active">
+              {{ user.telefono }}
+            </span>
+          }
+        </div>
+
+        <div class="users__action">
+          <i class="bx bx-edit"></i>
+        </div>
+      </div>
+    }
+  </div>
+</div>
+<div class="paginacion">
+  <button (click)="paginaActual = paginaActual - 1" [disabled]="paginaActual === 1">
+    Anterior
+  </button>
+  <span>Página {{ paginaActual }} de {{ totalPaginas }}</span>
+  <button (click)="avanzarPagina()" [disabled]="paginaActual === totalPaginas">Siguiente</button>
+  <span>Numero de estudiante por pagina</span>
+  <select [(ngModel)]="tamanoPagina">
+    <option [value]="5">5</option>
+    <option [value]="10">10</option>
+    <option [value]="20">20</option>
+  </select>
+</div>
