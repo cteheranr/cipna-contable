@@ -82,7 +82,7 @@ export class Facturas implements OnInit {
   seleccionarEstudiante(est: Estudiante) {
     this.ventaForm.patchValue({
       estudianteDoc: est.numeroDocumento,
-      estudiante: est.nombres+" "+est.apellidos
+      estudiante: est.nombres + ' ' + est.apellidos,
     });
 
     this.estudianteEncontrado = est;
@@ -143,10 +143,11 @@ export class Facturas implements OnInit {
 
   imprimirRecibo(recibo: any) {
     const ventana = window.open('', '_blank', 'width=800,height=600');
+    const usuario = localStorage.getItem('currentUser');
 
     if (!ventana) return;
 
-    if (recibo.metodo === 'mixto') {
+    if (recibo.metodo === 'mixto' && usuario) {
       ventana.document.write(`
         <html>
           <head>
@@ -173,14 +174,19 @@ export class Facturas implements OnInit {
 
             <div class="line"><strong>Método #1:</strong> ${recibo.metodo1}</div>
             <div class="line"><strong>Monto Total:</strong> $${recibo.monto1}</div>
+            <div class="line"><strong>Monto Numero de aprobación metodo 1:</strong> $${recibo.numeroAprobacion1}</div>
 
             <div class="line"><strong>Método #2:</strong> ${recibo.metodo2}</div>
             <div class="line"><strong>Monto Total:</strong> $${recibo.monto2}</div>
+            <div class="line"><strong>Monto Numero de aprobación metodo 2:</strong> $${recibo.numeroAprobacion2}</div>
 
             <div class="line"><strong>Método #3:</strong> ${recibo.metodo3}</div>
             <div class="line"><strong>Monto Total:</strong> $${recibo.monto3}</div>
+            <div class="line"><strong>Monto Numero de aprobación metodo 3:</strong> $${recibo.numeroAprobacion3}</div>
+
 
             <div class="line"><strong>Fecha:</strong> ${new Date().toLocaleString()}</div>
+            <div class="line"><strong>Responsable:</strong> ${usuario.split('@')[0]}</div>
 
             <script>
               window.onload = function() {
@@ -218,7 +224,9 @@ export class Facturas implements OnInit {
         <div class="line"><strong>Concepto:</strong> ${recibo.concepto}</div>
         <div class="line"><strong>Monto:</strong> $${recibo.monto}</div>
         <div class="line"><strong>Método:</strong> ${recibo.metodo}</div>
+        <div class="line"><strong>Monto Numero de aprobación:</strong> $${recibo.numeroAprobacion}</div>
         <div class="line"><strong>Fecha:</strong> ${new Date().toLocaleString()}</div>
+        <div class="line"><strong>Responsable:</strong> ${usuario?.split('@')[0]}</div>
 
         <script>
           window.onload = function() {

@@ -39,6 +39,11 @@ export class Diario {
   }
 
   async generarReporte() {
+    this.hoyVentas = 0;
+    this.hoyVentasEfectivo = 0;
+    this.hoyVentasTransf = 0;
+    this.hoyVentasDatafono = 0;
+    this.totalRecibos = 0;
     const fechaDia = this.fecha;
 
     const q = query(collection(this.firestore, 'recibos'), where('fecha', '==', fechaDia));
@@ -195,7 +200,7 @@ export class Diario {
 
     const workbook: XLSX.WorkBook = {
       Sheets: { Resumen: worksheet, Reporte: worksheet2 },
-      SheetNames: ['Resumen','Reporte'],
+      SheetNames: ['Resumen', 'Reporte'],
     };
 
     const excelBuffer: any = XLSX.write(workbook, {
