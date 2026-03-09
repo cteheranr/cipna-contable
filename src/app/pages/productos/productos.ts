@@ -36,6 +36,7 @@ export class Productos implements OnInit {
     if (data) {
       this.productos = JSON.parse(data);
     } else {
+      this.getSProducts();
     }
   }
 
