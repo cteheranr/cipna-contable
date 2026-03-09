@@ -1,0 +1,99 @@
+<div class="reportes-container">
+  <div class="header-section">
+    <div>
+      <h2><i class="fas fa-chart-line"></i> Cuadre diario</h2>
+      <p>Genera y descarga los cierres de caja diarios de la institución.</p>
+    </div>
+  </div>
+
+  <div class="generator-card">
+    <h3><i class="fas fa-file-export"></i> Generar Nuevo Reporte</h3>
+    <div class="filter-row">
+      <div class="input-group">
+        <label>Fecha</label>
+        <input type="date" [(ngModel)]="fecha" />
+      </div>
+      <div class="actions">
+        <button class="btn-download rep" (click)="generarReporte()">
+          <i class="fas fa-file-pdf"></i> Generar Reporte
+        </button>
+        <button class="btn-download pdf" (click)="descargarReporte('pdf')">
+          <i class="fas fa-file-pdf"></i> Descargar PDF
+        </button>
+        <button class="btn-download excel" (click)="descargarReporte('excel')">
+          <i class="fas fa-file-excel"></i> Descargar Excel
+        </button>
+      </div>
+    </div>
+  </div>
+
+  <div class="stats-grid">
+    <div class="stat-card">
+      <div class="icon-circle blue"><i class="bx bx-calendar-event"></i></div>
+      <div class="info">
+        <span>Recibos Generados</span>
+        <h3>{{ totalRecibos }}</h3>
+      </div>
+    </div>
+    <div class="stat-card">
+      <div class="icon-circle green"><i class="bx bx-receipt" ></i></div>
+      <div class="info">
+        <span>Ventas del día</span>
+        <h3>{{ hoyVentas | currency }}</h3>
+      </div>
+    </div>
+    <div class="stat-card">
+      <div class="icon-circle blue"><i class="bx bx-currency-notes"></i></div>
+      <div class="info">
+        <span>Ventas del día en efectivo</span>
+        <h3>{{ hoyVentasEfectivo | currency }}</h3>
+      </div>
+    </div>
+    <div class="stat-card">
+      <div class="icon-circle green"><i class="bx bx-credit-card-alt"></i></div>
+      <div class="info">
+        <span>Ventas del día por datafono</span>
+        <h3>{{ hoyVentasDatafono | currency }}</h3>
+      </div>
+    </div>
+    <div class="stat-card">
+      <div class="icon-circle blue"><i class="bx bx-swap-horizontal"></i></div>
+      <div class="info">
+        <span>Ventas del día por Transferncia</span>
+        <h3>{{ hoyVentasTransf | currency }}</h3>
+      </div>
+    </div>
+  </div>
+
+  <div class="history-section">
+    <h3>Reporte Generado</h3>
+    <table class="report-table">
+      <thead>
+        <tr>
+          <th>Fecha</th>
+          <th>Estudiante</th>
+          <th>Concepto</th>
+          <th>Metodo de pago</th>
+          <th>Monto cancelado</th>
+          <th>Acciones</th>
+        </tr>
+      </thead>
+      <tbody>
+        @for (rep of reportesDiarios; track $index) {
+          <tr>
+            <td>{{ rep.fecha| date: 'dd/MM/yyyy' }}</td>
+            <td>{{ rep.estudiante }}</td>
+            <td>{{ rep.notas }}</td> 
+            <td>{{ rep.metodo }}</td>
+            <td><strong>{{ rep.monto | currency }}</strong></td>
+            <td class="acciones">
+              <button class="btn-table" title="descargar pdf">
+                <i class="bx bx-file-detail"></i>
+              </button>
+            </td>
+          </tr>
+        }
+      </tbody>
+    </table>
+  </div>
+</div>

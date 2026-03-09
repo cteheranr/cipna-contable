@@ -6,7 +6,11 @@
     </button>
   </div>
 </header>
-<div class="container-table">
+@if (loading) {
+  <app-loading></app-loading>
+}
+@else {
+  <div class="container-table">
   <div class="users">
     <div class="users__header">
       <span>Nombre</span>
@@ -15,7 +19,7 @@
       <span></span>
     </div>
 
-    @for (user of estudiantesPaginados; track user.id) {
+    @for (user of getEstudiantesPaginados(); track user.id) {
       <div class="users__row">
         <div class="users__email">
           <div class="img"></div>
@@ -59,3 +63,5 @@
     <option [value]="20">20</option>
   </select>
 </div>
+
+}

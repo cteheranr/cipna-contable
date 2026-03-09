@@ -3,10 +3,9 @@ import { Auth, signInWithEmailAndPassword, signOut, user } from '@angular/fire/a
 import { Router } from '@angular/router';
 
 @Injectable({
-  providedIn: 'root'
+  providedIn: 'root',
 })
 export class AuthService {
-
   private auth: Auth = inject(Auth);
   private router: Router = inject(Router);
 
@@ -16,7 +15,12 @@ export class AuthService {
 
   async login(email: string, pass: string) {
     try {
-      return await signInWithEmailAndPassword(this.auth, email, pass);
+      const res = await signInWithEmailAndPassword(this.auth, email, pass);
+      if (res) {
+        const user = this.auth.currentUser;
+        if (user?.email) localStorage.setItem('currentUser', user?.email);
+      }
+      return res;
     } catch (error) {
       throw error;
     }

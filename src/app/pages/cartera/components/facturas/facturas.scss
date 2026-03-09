@@ -1,0 +1,135 @@
+.title {
+    color: var(--text-color)
+}
+
+.pos-container {
+  padding: 30px 0 0 0;
+  min-height: 100%;
+
+  .header {
+    margin-bottom: 25px;
+    h2 { color: var(--text-color); font-weight: 700; margin: 0; }
+    p { color: var(--text-color); margin: 5px 0 0 0; }
+  }
+
+  .venta-grid {
+    display: grid;
+    grid-template-columns: 1fr 450px;
+    gap: 20px;
+  }
+
+  .card {
+    background: var(--sidebar-color);
+    padding: 25px;
+    border-radius: 15px;
+    box-shadow: 0px 10px 30px rgba(0, 0, 0, 0.05);
+
+    h3 {
+      font-size: 1.1rem;
+      color: var(--primary-color);
+      margin-bottom: 20px;
+      border-bottom: 1px solid var(--sidebar-color);
+      padding-bottom: 10px;
+    }
+  }
+
+  .input-group {
+    margin-bottom: 15px;
+    display: flex;
+    flex-direction: column;
+
+    label {
+      font-size: 0.9rem;
+      color: var(--primary-color);
+      font-weight: 600;
+      margin-bottom: 8px;
+    }
+
+    input, select, textarea {
+      padding: 12px;
+      border: 1px solid #d1d9e8;
+      border-radius: 10px;
+      outline: none;
+      &:focus { border-color: var(--primary-color); }
+    }
+
+    .monto-input {
+      font-size: 1.5rem;
+      font-weight: 700;
+      color: var(--primary-color);
+      text-align: right;
+    }
+  }
+
+  .total-card {
+    background: var(--primary-color);
+    color: white;
+    h3 { color: white; border-color: rgba(255,255,255,0.2); }
+    label { color: white; }
+
+    .total-row {
+      display: flex;
+      justify-content: space-between;
+      margin-bottom: 10px;
+      &.highlight {
+        font-size: 1.4rem;
+        font-weight: 800;
+        margin-top: 15px;
+        border-top: 1px solid rgba(255,255,255,0.2);
+        padding-top: 15px;
+      }
+    }
+
+    .payment-methods{
+      display: flex;
+      justify-content: space-around;
+    }
+  }
+
+  .btn-generate {
+    width: 100%;
+    padding: 15px;
+    background: #05cd99;
+    color: white;
+    border: none;
+    border-radius: 12px;
+    font-weight: 700;
+    cursor: pointer;
+    margin-top: 20px;
+    transition: 0.3s;
+    &:hover:not(:disabled) { background: #04b386; transform: translateY(-2px); }
+    &:disabled { opacity: 0.5; cursor: not-allowed; }
+  }
+
+  .success-text { color: #05cd99; font-weight: 600; margin-top: 5px; }
+}
+
+@media (max-width: 900px) {
+  .venta-grid { grid-template-columns: 1fr; }
+}
+
+.suggestions {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  border: 1px solid #ddd;
+  max-height: 150px;
+  overflow-y: auto;
+  background: white;
+  position: absolute;
+  width: 100%;
+  z-index: 10;
+
+  li {
+    padding: 8px;
+    cursor: pointer;
+
+    &:hover {
+      background: #f0f0f0;
+    }
+  }
+}
+
+.input-group {
+  position: relative;
+}

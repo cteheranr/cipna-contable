@@ -1,5 +1,5 @@
-import { Component } from '@angular/core';
-import { Sidebar } from "../shared/components/sidebar/sidebar";
+import { Component, inject, OnInit } from '@angular/core';
+import { Sidebar } from '../shared/components/sidebar/sidebar';
 import { RouterOutlet } from '@angular/router';
 
 @Component({
@@ -8,6 +8,10 @@ import { RouterOutlet } from '@angular/router';
   templateUrl: './layout.html',
   styleUrl: './layout.scss',
 })
-export class Layout {
+export class Layout implements OnInit {
+
+  ngOnInit() {
+    
+  }
 
 }

@@ -12,3 +12,9 @@ export interface FacturaDetalle {
 
   cuotaPensionId?: string; // si aplica a pensión
 }
+
+export interface FacturaReport {
+  FechaGeneracion: string, 
+  fechaConsultada: string, 
+  totalVendido:  number
+}

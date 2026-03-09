@@ -1,44 +1,67 @@
-import { Component, OnInit } from '@angular/core';
-import { EstudiantesService } from '../../service/estudiantes';
+import { Component, inject, OnInit } from '@angular/core';
+import { StudentService } from '../../service/estudiantes';
 import { Estudiante } from '../../shared/models/estudiantes.model';
 import { FormsModule } from '@angular/forms';
+import { firstValueFrom } from 'rxjs';
+import { Loading } from '../../shared/components/Loading/loading';
 
 @Component({
   selector: 'app-estudiantes',
-  imports: [FormsModule],
+  imports: [FormsModule, Loading],
   templateUrl: './estudiantes.html',
   styleUrl: './estudiantes.scss',
 })
 export class Estudiantes implements OnInit {
   lista: Estudiante[] = [];
-  inicio: number = 0;
-  fin?: number;
-
-  constructor(private estudiantesSrv: EstudiantesService) {}
-
-  ngOnInit() {
-    this.estudiantesSrv.getStudens()
-  }
+  listaLocal: Estudiante[] = [];
 
   paginaActual = 1;
   tamanoPagina = 5;
 
-  get estudiantesPaginados() {
-    if (typeof this.tamanoPagina === 'string') {
-      this.tamanoPagina = parseInt(this.tamanoPagina);
+  inicio: number = 0;
+  fin?: number;
+
+  loading = true;
+
+  studentService = inject(StudentService);
+
+  ngOnInit() {
+    this.getStudentsLocal()
+  }
+
+  getStudentsLocal() {
+    const data = localStorage.getItem('estudiantes');
+
+    if (data) {
+      this.listaLocal = JSON.parse(data);
+      this.loading = false;
     }
+    else {
+      this.getStudents();
+    }
+  }
+  async getStudents() {
+    const data = await firstValueFrom(this.studentService.getStudents());
+    this.lista = data;
+    this.subirEnMemoriaEst();
+  }
+
+  subirEnMemoriaEst() {
+    localStorage.setItem('estudiantes', JSON.stringify(this.lista));
+    this.getStudentsLocal();
+  }
+
+  getEstudiantesPaginados() {
     this.inicio = (this.paginaActual - 1) * this.tamanoPagina;
     this.fin = this.inicio + this.tamanoPagina;
-    console.log('inicio', this.inicio, 'FIN', this.fin);
-    return this.lista.slice(this.inicio, this.fin);
+    return this.listaLocal.slice(this.inicio, this.fin);
   }
 
   get totalPaginas() {
-    return Math.ceil(this.lista.length / this.tamanoPagina);
+    return Math.ceil(this.listaLocal.length / this.tamanoPagina);
   }
 
   avanzarPagina() {
-    this.paginaActual = this.paginaActual + 1;
+    this.paginaActual++;
   }
-
 }

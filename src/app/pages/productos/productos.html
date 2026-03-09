@@ -1,1 +1,93 @@
-<p>productos works!</p>
+<div class="productos-container">
+  <div class="header-section">
+    <div>
+      <h2>Catálogo de Productos</h2>
+      <p>Gestiona uniformes, libros y servicios académicos.</p>
+    </div>
+    <button class="btn-nuevo" (click)="abrirModalNuevo()">
+      <i class="fas fa-plus"></i> Nuevo Producto
+    </button>
+  </div>
+
+  <div class="filters-bar">
+    <div class="search-box">
+      <i class="fas fa-search"></i>
+      <input type="text" placeholder="Buscar por nombre..." />
+    </div>
+    <div class="categories">
+      <span class="chip active">Todos</span>
+      <span class="chip">Uniformes</span>
+      <span class="chip">Libros</span>
+      <span class="chip">Pre-Icfes</span>
+    </div>
+  </div>
+
+  <div class="products-grid">
+    <div class="product-card" *ngFor="let p of productos">
+      <div class="badge" [ngClass]="{ 'low-stock': p.stock < 5 }">
+        {{ p.stock > 0 ? p.stock + ' en stock' : 'Agotado' }}
+      </div>
+      <div class="img-placeholder">
+        <i class="fas fa-box-open"></i>
+        <img [src]="" />
+      </div>
+      <div class="card-info">
+        <span class="category-tag">{{ p.categoria }}</span>
+        <h3>{{ p.nombre }}</h3>
+        <p class="price">{{ p.precio | currency }}</p>
+        <div class="actions">
+          <button class="btn-icon edit"><i class="fas fa-edit"></i></button>
+          <button class="btn-icon delete"><i class="fas fa-trash"></i></button>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+@if (showModal) {
+  <div class="modal-overlay">
+    <div class="modal-card">
+      <div class="modal-header">
+        <h3><i class="fas fa-tag"></i> Registrar Nuevo Producto</h3>
+        <button class="close-btn" (click)="cerrarModal()">&times;</button>
+      </div>
+
+      <form [formGroup]="productoForm" (ngSubmit)="guardarProducto()">
+        <div class="modal-body">
+          <div class="input-field">
+            <label>Nombre del Producto</label>
+            <input type="text" formControlName="nombre" placeholder="Ej: Camisa Gala Talla 12" />
+          </div>
+
+          <div class="row">
+            <div class="input-field">
+              <label>Categoría</label>
+              <select formControlName="categoria">
+                <option value="Uniforme">Uniforme</option>
+                <option value="Libro">Libro</option>
+                <option value="Preicfes">Pre-Icfes</option>
+                <option value="Otro">Otro</option>
+              </select>
+            </div>
+            <div class="input-field">
+              <label>Precio de Venta ($)</label>
+              <input type="number" formControlName="precio" />
+            </div>
+          </div>
+
+          <div class="input-field">
+            <label>Stock Inicial</label>
+            <input type="number" formControlName="stock" />
+          </div>
+        </div>
+
+        <div class="modal-footer">
+          <button type="button" class="btn-cancel" (click)="cerrarModal()">Cancelar</button>
+          <button type="submit" class="btn-save" [disabled]="productoForm.invalid">
+            Guardar Producto
+          </button>
+        </div>
+      </form>
+    </div>
+  </div>
+}

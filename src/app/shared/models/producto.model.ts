@@ -1,12 +1,10 @@
 import { TipoProducto } from './enums';
 
 export interface Producto {
-  id: string;
-  tipo: TipoProducto;
-
+  id?: string;
+  categoria: string;
   nombre: string;
-
-  precioBase: number;
-
+  precio: number;
+  stock: number;
   activo: boolean;
 }

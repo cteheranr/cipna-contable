@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { ChangeDetectorRef, Component } from '@angular/core';
 import {
   FormBuilder,
   FormGroup,
@@ -27,6 +27,7 @@ export class Login {
     private fb: FormBuilder,
     private router: Router,
     private activatedRoute: ActivatedRoute,
+    private cd: ChangeDetectorRef,
   ) {}
 
   ngOnInit(): void {
@@ -37,15 +38,24 @@ export class Login {
   }
 
   login() {
+    this.message = '';
+
     if (this.loginForm.valid) {
       console.log('Datos del Formulario:', this.loginForm.value);
       const email = this.loginForm.value.username;
       const password = this.loginForm.value.password;
-      this.loginService.login(email, password).then((res) => {
-        this.router.navigate(['../app/home'], {
-          relativeTo: this.activatedRoute,
+      this.loginService
+        .login(email, password)
+        .then((res) => {
+          this.router.navigate(['../app/home'], {
+            relativeTo: this.activatedRoute,
+          });
+        })
+        .catch((error) => {
+          console.error('este es el error', error);
+          this.message = 'El usuario o la contraseña son incorrectos';
+          this.cd.detectChanges();
         });
-      });
     }
   }
 }

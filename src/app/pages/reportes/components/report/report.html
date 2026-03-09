@@ -1,0 +1,10 @@
+<h2 class="title">REPORTES</h2>
+<div class="reportes">
+  @for (item of navIcons; track item.label) {
+    <div class="card" [routerLink]="[item.routerLink]">
+    <i [ngClass]="item.icon"></i>
+    <h3>{{item.label}}</h3>
+  </div>
+  }
+  
+</div>

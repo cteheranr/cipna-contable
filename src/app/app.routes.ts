@@ -9,12 +9,23 @@ import { Reportes } from './pages/reportes/reportes';
 import { Configuracion } from './pages/configuracion/configuracion';
 import { authGuard } from './shared/guards/auth/auth.guard';
 import { publicGuard } from './shared/guards/public/public.guard';
+import { CarteraMenu } from './pages/cartera/components/cartera-menu/cartera-menu';
+import { Facturas } from './pages/cartera/components/facturas/facturas';
+import { Pensiones } from './pages/cartera/components/pensiones/pensiones';
+import { Acuerdos } from './pages/cartera/components/acuerdos/acuerdos';
+import { Libros } from './pages/cartera/components/libros/libros';
+import { Uniformes } from './pages/cartera/components/uniformes/uniformes';
+import { Diario } from './pages/reportes/components/diario/diario';
+import { Efectivo } from './pages/reportes/components/efectivo/efectivo';
+import { Clientes } from './pages/reportes/components/clientes/clientes';
+import { Mensual } from './pages/reportes/components/mensual/mensual';
+import { Report } from './pages/reportes/components/report/report';
 
 export const routes: Routes = [
   {
     path: 'login',
     component: Login,
-    canActivate: [publicGuard]
+    canActivate: [publicGuard],
   },
   {
     path: 'app',
@@ -32,6 +43,32 @@ export const routes: Routes = [
       {
         path: 'cartera',
         component: Cartera,
+        children: [
+          {
+            path: '',
+            component: CarteraMenu,
+          },
+          {
+            path: 'facturas',
+            component: Facturas,
+          },
+          {
+            path: 'pensiones',
+            component: Pensiones,
+          },
+          {
+            path: 'acuerdos',
+            component: Acuerdos,
+          },
+          {
+            path: 'libros',
+            component: Libros,
+          },
+          {
+            path: 'uniformes',
+            component: Uniformes,
+          },
+        ],
       },
       {
         path: 'productos',
@@ -40,6 +77,28 @@ export const routes: Routes = [
       {
         path: 'reportes',
         component: Reportes,
+        children: [
+          {
+            path: '',
+            component: Report,
+          },
+          {
+            path: 'diario',
+            component: Diario,
+          },
+          {
+            path: 'efectivo',
+            component: Efectivo,
+          },
+          {
+            path: 'por-cliente',
+            component: Clientes,
+          },
+          {
+            path: 'mensual',
+            component: Mensual,
+          },
+        ]
       },
       {
         path: 'setting',

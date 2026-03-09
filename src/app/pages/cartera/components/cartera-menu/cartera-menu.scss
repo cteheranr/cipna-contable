@@ -1,0 +1,50 @@
+.title {
+  color: var(--text-color);
+  padding: 0 0 30px 0;
+}
+
+.cartera {
+
+  display: grid;
+  gap: 20px;
+
+  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+}
+
+.card {
+  background: var(--sidebar-color);
+  border-radius: 14px;
+  padding: 20px;
+
+  box-shadow: 0 5px 15px rgba(0, 0, 0, 0.08);
+
+  transition: 0.2s;
+  display: flex;
+  align-items: center;
+  flex-direction: column;
+  justify-content: center;
+  gap: 20px;
+  cursor: pointer;
+  max-width: 250px;
+  min-height: 130px;
+
+  i {
+    color: var(--text-color);
+    font-size: 30px;
+  }
+
+  h3 {
+    font-size: 14px;
+    color: var(--text-color);
+  }
+
+  &:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 10px 25px rgba(0, 0, 0, 0.12);
+    background: var(--primary-color);
+    i,
+    h3 {
+      color: var(--white-color);
+    }
+  }
+}

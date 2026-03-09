@@ -16,15 +16,15 @@ export const navbarData: NavbarInterface[] = [
   {
     routerLink: 'cartera',
     icon: 'bx bx-wallet-note',
-    label: 'Cartera',
+    label: 'Ventas',
     active: false,
   },
-  {
-    routerLink: '+exepciones',
-    icon: 'bx bx-user-id-card',
-    label: 'Exepciones',
-    active: false,
-  },
+  // {
+  //   routerLink: 'exepciones',
+  //   icon: 'bx bx-user-id-card',
+  //   label: 'Exepciones',
+  //   active: false,
+  // },
   {
     routerLink: 'productos',
     icon: 'bx bx-package',
