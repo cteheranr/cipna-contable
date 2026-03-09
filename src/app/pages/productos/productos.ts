@@ -1,5 +1,5 @@
 import { CommonModule } from '@angular/common';
-import { Component, inject, OnInit } from '@angular/core';
+import { ChangeDetectorRef, Component, inject, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
 import { ProductoService } from '../../service/productoSrv/productoSrv';
 import { Producto } from '../../shared/models/producto.model';
@@ -18,7 +18,8 @@ export class Productos implements OnInit {
   productoForm: FormGroup;
   productos: Producto[] = [];
 
-  constructor() {
+
+  constructor(private cd: ChangeDetectorRef) {
     this.productoForm = this.fb.group({
       nombre: ['', [Validators.required, Validators.minLength(3)]],
       categoria: ['Uniforme', Validators.required],
@@ -43,11 +44,13 @@ export class Productos implements OnInit {
   async getSProducts() {
     const dataProducto = await firstValueFrom(this.productSrv.getProductos());
     this.productos = dataProducto;
+    this.subirEnMemoriaPro();
   }
 
-  subirEnMemoriaEst() {
+  subirEnMemoriaPro() {
     localStorage.setItem('productos', JSON.stringify(this.productos));
     this.getSProductsLocal();
+    this.cd.detectChanges();
   }
 
   abrirModalNuevo() {
@@ -69,14 +72,11 @@ export class Productos implements OnInit {
         const ref = await this.productSrv.addProductos(nuevoProducto);
         console.log('Guardado con ID:', ref.id);
         this.cerrarModal();
-        this.getProductosPosReg();
+
       } catch (error) {
         console.error('Error guardando producto:', error);
       }
     }
   }
 
-  async getProductosPosReg() {
-    window.location.reload();
-  }
 }
