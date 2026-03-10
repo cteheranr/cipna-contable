@@ -150,14 +150,42 @@ export class Diario {
 
   obtenerMetodo(recibo: any): string {
     if (recibo.metodo !== 'mixto') {
-      return recibo.metodo;
+      if (recibo.metodo !== 'efectivo') {
+        return (recibo.metodo+" ("+recibo.numeroAprobacion+")");
+      } else {
+        return recibo.metodo;
+      }
     }
 
     const metodos: string[] = [];
 
-    if (recibo.metodo1) metodos.push(recibo.metodo1);
-    if (recibo.metodo2) metodos.push(recibo.metodo2);
-    if (recibo.metodo3) metodos.push(recibo.metodo3);
+    if (recibo.metodo1) {
+      const metodo1 = recibo.metodo1;
+      if (recibo.numeroAprobacion1) {
+        const numApro = recibo.numeroAprobacion1;
+        metodos.push(metodo1 + ' (' + numApro + ')');
+      } else {
+        metodos.push(metodo1);
+      }
+    }
+    if (recibo.metodo2) {
+      const metodo2 = recibo.metodo2;
+      if (recibo.numeroAprobacion2) {
+        const numApro = recibo.numeroAprobacion2;
+        metodos.push(metodo2 + ' (' + numApro + ')');
+      } else {
+        metodos.push(metodo2);
+      }
+    }
+    if (recibo.metodo3) {
+      const metodo3 = recibo.metodo3;
+      if (recibo.numeroAprobacion3) {
+        const numApro = recibo.numeroAprobacion3;
+        metodos.push(metodo3 + ' (' + numApro + ')');
+      } else {
+        metodos.push(metodo3);
+      }
+    }
 
     return metodos.join(' + ');
   }

@@ -18,7 +18,6 @@ export class Productos implements OnInit {
   productoForm: FormGroup;
   productos: Producto[] = [];
 
-
   constructor(private cd: ChangeDetectorRef) {
     this.productoForm = this.fb.group({
       nombre: ['', [Validators.required, Validators.minLength(3)]],
@@ -49,6 +48,7 @@ export class Productos implements OnInit {
 
   subirEnMemoriaPro() {
     localStorage.setItem('productos', JSON.stringify(this.productos));
+    console.log(localStorage.getItem('productos'));
     this.getSProductsLocal();
     this.cd.detectChanges();
   }
@@ -58,8 +58,10 @@ export class Productos implements OnInit {
   }
 
   cerrarModal() {
+    localStorage.removeItem('productos')
     this.showModal = false;
     this.productoForm.reset({ categoria: 'Uniforme', precio: 0, stock: 0 });
+
   }
 
   async guardarProducto() {
@@ -72,11 +74,10 @@ export class Productos implements OnInit {
         const ref = await this.productSrv.addProductos(nuevoProducto);
         console.log('Guardado con ID:', ref.id);
         this.cerrarModal();
-
+        this.getSProducts();
       } catch (error) {
         console.error('Error guardando producto:', error);
       }
     }
   }
-
 }
