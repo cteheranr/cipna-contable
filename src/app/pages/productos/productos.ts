@@ -48,7 +48,6 @@ export class Productos implements OnInit {
 
   subirEnMemoriaPro() {
     localStorage.setItem('productos', JSON.stringify(this.productos));
-    console.log(localStorage.getItem('productos'));
     this.getSProductsLocal();
     this.cd.detectChanges();
   }
@@ -72,7 +71,6 @@ export class Productos implements OnInit {
       };
       try {
         const ref = await this.productSrv.addProductos(nuevoProducto);
-        console.log('Guardado con ID:', ref.id);
         this.cerrarModal();
         this.getSProducts();
       } catch (error) {

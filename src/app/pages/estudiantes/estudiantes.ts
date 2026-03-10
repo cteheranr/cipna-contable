@@ -46,6 +46,10 @@ export class Estudiantes implements OnInit {
     this.subirEnMemoriaEst();
   }
 
+  actualizarEst(){
+    this.getStudents();
+  }
+
   subirEnMemoriaEst() {
     localStorage.setItem('estudiantes', JSON.stringify(this.lista));
     this.getStudentsLocal();

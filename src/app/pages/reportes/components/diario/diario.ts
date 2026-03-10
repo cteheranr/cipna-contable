@@ -31,7 +31,6 @@ export class Diario {
   reporteGenerado: FacturaReport[] = [];
 
   descargarReporte(formato: 'pdf' | 'excel') {
-    console.log(`Generando reporte en ${formato} desde ${this.fecha}`);
     if (formato === 'pdf') this.generarPDF();
     if (formato === 'excel') this.generarExcel();
     // Aquí integrarías una librería como jsPDF o ExcelJS

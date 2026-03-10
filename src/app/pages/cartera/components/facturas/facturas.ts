@@ -101,12 +101,10 @@ export class Facturas implements OnInit {
       };
 
       if (this.ventaForm.value.metodo === 'mixto') {
-        console.log('Aqui entro');
         if (this.verificacionDeMontos()) {
           await this.enviarDatos(data);
         }
       } else {
-        console.log('Entro');
         this.enviarDatos(data);
       }
     }
@@ -115,7 +113,6 @@ export class Facturas implements OnInit {
   async enviarDatos(data: any) {
     try {
       const ref = await addDoc(collection(this.firestore, 'recibos'), data);
-      console.log('Guardado con ID:', ref.id);
       this.imprimirRecibo({ id: ref.id, ...data });
     } catch (error) {
       console.error('Error guardando recibo:', error);
@@ -124,14 +121,10 @@ export class Facturas implements OnInit {
 
   verificacionDeMontos(): boolean {
     const monto1 = parseInt(this.ventaForm.value.monto1);
-    console.log('Monto1- ', monto1);
     const monto2 = parseInt(this.ventaForm.value.monto2);
-    console.log('Monto2- ', monto2);
     const monto3 = parseInt(this.ventaForm.value.monto3);
-    console.log('Monto3- ', monto3);
 
     const total = monto1 + monto2 + monto3;
-    console.log(this.ventaForm.value.monto, 'Este es el valor que debe sumar: ', total);
 
     if (this.ventaForm.value.monto === total) {
       return true;

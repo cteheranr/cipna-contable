@@ -41,7 +41,6 @@ export class Login {
     this.message = '';
 
     if (this.loginForm.valid) {
-      console.log('Datos del Formulario:', this.loginForm.value);
       const email = this.loginForm.value.username;
       const password = this.loginForm.value.password;
       this.loginService

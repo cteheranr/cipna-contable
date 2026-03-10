@@ -25,7 +25,6 @@ export class StudentService {
   }
 
   getStudents(): Observable<Estudiante[]> {
-    console.log("entro");
     return collectionData(this.collectionRef, { idField: 'id' }) as Observable<Estudiante[]>;
   }
 
