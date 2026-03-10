@@ -22,7 +22,7 @@ export class Diario {
   hoyVentasTransf = 0;
   hoyVentasDatafono = 0;
   totalRecibos = 0;
-  deducionesHoy = 0;
+  deduccionesHoy = 0;
   fechaMaxima: string;
 
   private firestore: Firestore = inject(Firestore);
@@ -41,7 +41,6 @@ export class Diario {
   descargarReporte(formato: 'pdf' | 'excel') {
     if (formato === 'pdf') this.generarPDF();
     if (formato === 'excel') this.generarExcel();
-    // Aquí integrarías una librería como jsPDF o ExcelJS
     alert(`Preparando descarga de reporte en formato ${formato.toUpperCase()}...`);
   }
 
@@ -51,7 +50,7 @@ export class Diario {
     this.hoyVentasTransf = 0;
     this.hoyVentasDatafono = 0;
     this.totalRecibos = 0;
-    this.deducionesHoy = 0;
+    this.deduccionesHoy = 0;
     const fechaDia = this.fecha;
 
     const q = query(collection(this.firestore, 'recibos'), where('fecha', '==', fechaDia));
@@ -69,15 +68,15 @@ export class Diario {
       ...doc.data(),
     }));
 
+    this.obtenerEgresos(egresos);
     this.obtenerRecibosTotales(recibos);
     this.obtenerVentasTotales(recibos);
-    this.obtenerEgresos(egresos);
   }
 
   obtenerEgresos(egresos: any[]) {
     this.egresosDiarios = egresos;
     for (const egreso of egresos) {
-      this.deducionesHoy += egreso.monto;
+      this.deduccionesHoy += egreso.monto;
     }
     this.cd.detectChanges();
   }
@@ -108,6 +107,7 @@ export class Diario {
         }
       }
     }
+    this.hoyVentasEfectivo -= this.deduccionesHoy;
     this.addInfoReportGen();
     this.cd.detectChanges();
   }
@@ -152,7 +152,7 @@ export class Diario {
     doc.text(`Total efectivo: $${this.hoyVentasEfectivo.toLocaleString()}`, 14, 48);
     doc.text(`Total transferencia: $${this.hoyVentasTransf.toLocaleString()}`, 14, 56);
     doc.text(`Total datáfono: $${this.hoyVentasDatafono.toLocaleString()}`, 14, 64);
-    doc.text(`Total egreso: -$${this.deducionesHoy.toLocaleString()}`, 14, 72);
+    doc.text(`Total egreso: -$${this.deduccionesHoy.toLocaleString()}`, 14, 72);
     doc.text(`Total ventas del día: $${this.hoyVentas.toLocaleString()}`, 14, 80);
 
     const rows = this.reportesDiarios.map((r) => [
@@ -190,7 +190,7 @@ export class Diario {
 
     if (!egresosRows.length) {
       finalY = (doc as any).lastAutoTable.finalY + 10;
-      doc.text('No se realizaron deusiones en el día de hoy', 14, finalY);
+      doc.text('No se realizaron deducciones en el día de hoy', 14, finalY);
     }
 
     doc.save(`reporte-${this.fecha}.pdf`);
