@@ -1,0 +1,65 @@
+<div class="egresos-container">
+  <div class="header-section">
+    <div>
+      <h2>Egresos</h2>
+      <p>Ingresa todos los datos para registrar un egreso de caja.</p>
+    </div>
+  </div>
+  <div class="card">
+    <header class="card-header">
+      <h2>Registro de Egreso Diario</h2>
+    </header>
+
+    <form [formGroup]="egresoForm" (ngSubmit)="registrarEgreso()" class="egresos-form">
+      <div class="form-group sm">
+        <label>Fecha</label>
+        <input
+          type="date"
+          formControlName="fecha"
+          [max]="fechaMaxima"
+          [class.error]="egresoForm.get('fecha')?.invalid && egresoForm.get('fecha')?.touched"
+        />
+      </div>
+
+      <div class="form-group sm">
+        <label>Categoría</label>
+        <select
+          formControlName="categoria"
+          [class.error]="
+            egresoForm.get('categoria')?.invalid && egresoForm.get('categoria')?.touched
+          "
+        >
+          <option value="" disabled>Selecciona una...</option>
+          @for (cat of categorias; track cat) {
+            <option [value]="cat">{{ cat }}</option>
+          }
+        </select>
+      </div>
+
+      <div class="form-group full">
+        <label>Concepto / Descripción</label>
+        <input type="text" formControlName="concepto" placeholder="Ej: Pago de internet" />
+      </div>
+
+      <div class="form-group full">
+        <label>Monto ($)</label>
+        <div class="input-prefix">
+          <span>$</span>
+          <input type="number" formControlName="monto" placeholder="0.00" />
+        </div>
+        <small
+          class="error-text"
+          *ngIf="egresoForm.get('monto')?.invalid && egresoForm.get('monto')?.touched"
+        >
+          Ingrese un monto válido mayor a 0.
+        </small>
+      </div>
+
+      <footer class="form-actions">
+        <button type="submit" [disabled]="egresoForm.invalid" class="btn-submit">
+          Guardar Egreso
+        </button>
+      </footer>
+    </form>
+  </div>
+</div>

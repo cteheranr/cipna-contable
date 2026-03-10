@@ -11,7 +11,7 @@
     <div class="filter-row">
       <div class="input-group">
         <label>Fecha</label>
-        <input type="date" [(ngModel)]="fecha" />
+        <input type="date" [(ngModel)]="fecha" [max]="fechaMaxima"/>
       </div>
       <div class="actions">
         <button class="btn-download rep" (click)="generarReporte()">
@@ -63,6 +63,15 @@
         <h3>{{ hoyVentasTransf | currency }}</h3>
       </div>
     </div>
+    @if (deducionesHoy > 0) {
+      <div class="stat-card">
+      <div class="icon-circle green"><i class="bx bx-print-dollar"></i></div>
+      <div class="info">
+        <span>Egresos del día</span>
+        <h3 class="deduciones">- {{ deducionesHoy | currency }}</h3>
+      </div>
+    </div>
+    }
   </div>
 
   <div class="history-section">

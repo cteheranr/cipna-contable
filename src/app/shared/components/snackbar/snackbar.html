@@ -1,0 +1,11 @@
+<div class="snackbar-container" [class.show]="notif.show()" [class]="notif.type()">
+  <div class="snackbar-content">
+    <i class="fas" [ngClass]="{
+      'bx bx-check-circle': notif.type() === 'success',
+      'bx bx-message-circle-exclamation': notif.type() === 'error',
+      'bx bx-info-circle': notif.type() === 'info'
+    }"></i>
+    <span>{{ notif.message() }}</span>
+  </div>
+  <button class="close-btn" (click)="notif.show.set(false)">&times;</button>
+</div>

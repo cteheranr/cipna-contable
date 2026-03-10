@@ -19,12 +19,12 @@ export const navbarData: NavbarInterface[] = [
     label: 'Ventas',
     active: false,
   },
-  // {
-  //   routerLink: 'exepciones',
-  //   icon: 'bx bx-user-id-card',
-  //   label: 'Exepciones',
-  //   active: false,
-  // },
+  {
+    routerLink: 'egresos',
+    icon: 'bx bx-print-dollar',
+    label: 'Egresos',
+    active: false,
+  },
   {
     routerLink: 'productos',
     icon: 'bx bx-package',

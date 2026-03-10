@@ -1,0 +1,126 @@
+.egresos-container {
+  padding: 2rem;
+
+  .header-section {
+    margin-bottom: 25px;
+    h2 {
+      color: var(--text-color);
+      font-weight: 700;
+      display: flex;
+      align-items: center;
+    }
+    p {
+      color: var(--text-color);
+    }
+  }
+
+  .card {
+    background: var(--sidebar-color);
+    padding: 2.5rem;
+    border-radius: 1rem;
+    box-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.1);
+    width: 100%;
+    max-width: 600px;
+    border: 1px solid #e2e8f0;
+
+    .card-header {
+      display: flex;
+      align-items: center;
+      margin-bottom: 2rem;
+
+      h2 {
+        font-size: 1.25rem;
+        font-weight: 700;
+        color: var(--text-color);
+        margin: 0;
+      }
+    }
+  }
+}
+
+.egresos-form {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 1.5rem;
+
+  .form-group {
+    display: flex;
+    flex-direction: column;
+
+    &.full {
+      grid-column: span 2;
+    }
+
+    label {
+      font-size: 0.875rem;
+      font-weight: 600;
+      color: var(--text-color);
+      margin-bottom: 0.5rem;
+    }
+
+    input,
+    select {
+      padding: 0.6rem 0.8rem;
+      border: 1px solid #e2e8f0;
+      border-radius: 0.5rem;
+      outline: none;
+      transition: all 0.2s ease;
+
+      &:focus {
+        border-color: var(--primary-color);
+        box-shadow: 0 0 0 3px rgba(var(--primary-color), 0.1);
+      }
+
+      &.error {
+        border-color: var(--primary-color);
+      }
+    }
+  }
+
+  .input-prefix {
+    position: relative;
+    span {
+      position: absolute;
+      left: 0.75rem;
+      top: 50%;
+      transform: translateY(-50%);
+      color: #94a3b8;
+    }
+    input {
+      padding-left: 2rem;
+      width: 100%;
+    }
+  }
+
+  .error-text {
+    color: var(--primary-color);
+    font-size: 0.75rem;
+    margin-top: 0.25rem;
+  }
+
+  .form-actions {
+    grid-column: span 2;
+    margin-top: 1rem;
+
+    .btn-submit {
+      width: 100%;
+      background-color: var(--primary-color);
+      color: white;
+      padding: 0.75rem;
+      border-radius: 0.5rem;
+      font-weight: 600;
+      border: none;
+      cursor: pointer;
+      transition: background 0.3s;
+
+      &:hover:not(:disabled) {
+        background-color: var(--primary-color);
+      }
+
+      &:disabled {
+        background-color: #cbd5e1;
+        cursor: not-allowed;
+      }
+    }
+  }
+}

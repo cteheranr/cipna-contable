@@ -20,6 +20,7 @@ import { Efectivo } from './pages/reportes/components/efectivo/efectivo';
 import { Clientes } from './pages/reportes/components/clientes/clientes';
 import { Mensual } from './pages/reportes/components/mensual/mensual';
 import { Report } from './pages/reportes/components/report/report';
+import { Egresos } from './pages/egresos/egresos';
 
 export const routes: Routes = [
   {
@@ -69,6 +70,10 @@ export const routes: Routes = [
             component: Uniformes,
           },
         ],
+      },
+      {
+        path: 'egresos',
+        component: Egresos,
       },
       {
         path: 'productos',

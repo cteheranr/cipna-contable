@@ -4,6 +4,7 @@ import { FormBuilder, FormGroup, ReactiveFormsModule, Validators } from '@angula
 import { ProductoService } from '../../service/productoSrv/productoSrv';
 import { Producto } from '../../shared/models/producto.model';
 import { firstValueFrom } from 'rxjs';
+import { NotificationService } from '../../service/notificaciones/notificaciones';
 
 @Component({
   selector: 'app-productos',
@@ -14,6 +15,8 @@ import { firstValueFrom } from 'rxjs';
 export class Productos implements OnInit {
   private fb = inject(FormBuilder);
   private productSrv = inject(ProductoService);
+  private notifService = inject(NotificationService);
+
   showModal = false;
   productoForm: FormGroup;
   productos: Producto[] = [];
@@ -57,10 +60,9 @@ export class Productos implements OnInit {
   }
 
   cerrarModal() {
-    localStorage.removeItem('productos')
+    localStorage.removeItem('productos');
     this.showModal = false;
     this.productoForm.reset({ categoria: 'Uniforme', precio: 0, stock: 0 });
-
   }
 
   async guardarProducto() {
@@ -73,8 +75,10 @@ export class Productos implements OnInit {
         const ref = await this.productSrv.addProductos(nuevoProducto);
         this.cerrarModal();
         this.getSProducts();
+        this.notifService.showNotification('Producto registrado con exito.', 'success');
       } catch (error) {
         console.error('Error guardando producto:', error);
+        this.notifService.showNotification('Error guardando el producto', 'error');
       }
     }
   }
