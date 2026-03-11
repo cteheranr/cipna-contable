@@ -1,5 +1,6 @@
 export interface NavbarInterface {
-    routerLink: string;
+    routerLink: string,
+    detalle?: string,
     icon?: string,
     label: string,
     active: boolean,

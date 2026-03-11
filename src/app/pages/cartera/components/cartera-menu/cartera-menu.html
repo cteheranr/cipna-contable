@@ -1,4 +1,4 @@
-<h2 class="title">VENTAS</h2>
+<!-- <h2 class="title">VENTAS</h2>
 <div class="cartera">
   @for (item of navIcons; track item.label) {
     <div class="card" [routerLink]="[item.routerLink]">
@@ -7,4 +7,28 @@
   </div>
   }
   
+</div> -->
+
+<div class="ventas-dashboard">
+  <header class="page-header">
+    <h1>Ventas y Servicios</h1>
+    <p>Seleccione el módulo contable que desea gestionar hoy.</p>
+  </header>
+
+  <div class="options-grid">
+    @for (item of navIcons; track $index) {
+      <div class="menu-card" [routerLink]="[item.routerLink]">
+        <div class="icon-box blue">
+          <i [ngClass]="item.icon"></i>
+        </div>
+        <div class="card-content">
+          <h3>{{ item.label }}</h3>
+          <p>{{ item.detalle }}</p>
+        </div>
+        <div class="arrow-indicator">
+          <i class="fas fa-chevron-right"></i>
+        </div>
+      </div>
+    }
+  </div>
 </div>

@@ -4,13 +4,15 @@ export const navIconsReport: NavbarInterface[] = [
   {
     routerLink: 'diario',
     icon: 'bx bx-calendar-detail',
-    label: 'Reporte diario',
+    label: 'Reporte diario',    
+    detalle: 'Reporte de ventas y egresos diarios.',
     active: false,
   },
   {
     routerLink: 'por-cliente',
     icon: 'bx bx-dashboard',
     label: 'Reporte por Cliente',
+    detalle: 'Reporte de ventas por clientes.',
     active: false,
   },
   // {
@@ -22,6 +24,7 @@ export const navIconsReport: NavbarInterface[] = [
   {
     routerLink: 'mensual',
     icon: 'bx bx-book',
+    detalle: 'Reporte de ventas y egresos por mensuales.',
     label: 'Reporte mensual',
     active: false,
   },

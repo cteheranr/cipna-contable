@@ -1,1 +1,55 @@
-<app-construccion></app-construccion>
+<!-- <app-construccion></app-construccion> -->
+<div class="dashboard-container">
+  <header class="welcome-section">
+    <h1>Panel de Control</h1>
+    <p>Bienvenido de nuevo al sistema contable de la institución.</p>
+  </header>
+
+  <div class="metrics-grid">
+    <div class="card stat-card">
+      <div class="icon-bg blue"><i class="fas fa-users"></i></div>
+      <div class="data">
+        <span>Total Estudiantes</span>
+        <h3>{{ totalEstudiantes }}</h3>
+      </div>
+    </div>
+
+    <div class="card stat-card">
+      <div class="icon-bg green"><i class="fas fa-wallet"></i></div>
+      <div class="data">
+        <span>Recaudado Hoy</span>
+        <h3>{{ recaudadoHoy | currency }}</h3>
+      </div>
+    </div>
+
+    <div class="card stat-card">
+      <div class="icon-bg orange"><i class="fas fa-exclamation-triangle"></i></div>
+      <div class="data">
+        <span>Cartera Pendiente</span>
+        <h3>{{ carteraPendiente | currency }}</h3>
+      </div>
+    </div>
+  </div>
+
+  <div class="main-grid">
+    <div class="card action-card">
+      <h3>Acciones Rápidas</h3>
+      <div class="button-list">
+        <button routerLink="/ventas/factura" class="btn-action">
+          <i class="fas fa-plus"></i> Nueva Factura
+        </button>
+        <button routerLink="/estudiantes" class="btn-action secondary">
+          <i class="fas fa-user-plus"></i> Registrar Estudiante
+        </button>
+      </div>
+    </div>
+
+    <div class="card activity-card">
+      <h3>Últimos Movimientos</h3>
+      <div class="empty-state" *ngIf="movimientos.length === 0">
+        <img src="https://undraw.co/api/illustrations/svg/empty" alt="Sin datos" />
+        <p>No hay transacciones recientes para mostrar.</p>
+      </div>
+    </div>
+  </div>
+</div>
