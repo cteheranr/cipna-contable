@@ -172,7 +172,7 @@ This typically indicates that your device does not have a healthy Internet conne
       
         <br/>
         <div class="line"><strong>Valor Total:</strong> $${e.total.toLocaleString()}</div>
-        <div class="line"><strong>Abono:</strong> $${e.abono.toLocaleString()}</div>
+        <div class="line"><strong>Abono:</strong> $${e.abonoTotal.toLocaleString()}</div>
         <div class="line"><strong>Fecha:</strong> ${e.fecha}</div>
         <div class="line"><strong>Responsable:</strong> ${r?.split("@")[0]}</div>
 
