@@ -192,7 +192,7 @@ export class Uniformes implements OnInit {
       
         <br/>
         <div class="line"><strong>Valor Total:</strong> $${recibo.total.toLocaleString()}</div>
-        <div class="line"><strong>Abono:</strong> $${recibo.abono.toLocaleString()}</div>
+        <div class="line"><strong>Abono:</strong> $${recibo.abonoTotal.toLocaleString()}</div>
         <div class="line"><strong>Fecha:</strong> ${recibo.fecha}</div>
         <div class="line"><strong>Responsable:</strong> ${usuario?.split('@')[0]}</div>
 
