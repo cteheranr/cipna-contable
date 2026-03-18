@@ -1,7 +1,7 @@
 <div class="egresos-container">
   <div class="header-section">
     <div>
-      <h2>Egresos</h2>
+      <h1>Egresos</h1>
       <p>Ingresa todos los datos para registrar un egreso de caja.</p>
     </div>
   </div>
@@ -47,12 +47,9 @@
           <span>$</span>
           <input type="number" formControlName="monto" placeholder="0.00" />
         </div>
-        <small
-          class="error-text"
-          *ngIf="egresoForm.get('monto')?.invalid && egresoForm.get('monto')?.touched"
-        >
-          Ingrese un monto válido mayor a 0.
-        </small>
+        @if (egresoForm.get('monto')?.invalid && egresoForm.get('monto')?.touched) {
+          <small class="error-text"> Ingrese un monto válido mayor a 0. </small>
+        }
       </div>
 
       <footer class="form-actions">

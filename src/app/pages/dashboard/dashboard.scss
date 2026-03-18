@@ -108,10 +108,10 @@
     .empty-state {
       text-align: center;
       padding: 40px;
-      img {
+      .icon {
         width: 150px;
         opacity: 0.6;
-        margin-bottom: 15px;
+        font-size: 40px;
       }
       p {
         color: var(--text-color);

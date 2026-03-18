@@ -21,6 +21,7 @@ import { Clientes } from './pages/reportes/components/clientes/clientes';
 import { Mensual } from './pages/reportes/components/mensual/mensual';
 import { Report } from './pages/reportes/components/report/report';
 import { Egresos } from './pages/egresos/egresos';
+import { RepUniformes } from './pages/reportes/components/uniformes/uniformes';
 
 export const routes: Routes = [
   {
@@ -102,6 +103,10 @@ export const routes: Routes = [
           {
             path: 'mensual',
             component: Mensual,
+          },
+          {
+            path: 'report-uniforme',
+            component: RepUniformes,
           },
         ]
       },

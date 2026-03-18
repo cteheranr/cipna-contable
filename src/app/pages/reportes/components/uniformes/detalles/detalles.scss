@@ -1,0 +1,323 @@
+.detail-sidebar {
+  position: fixed;
+  top: 0;
+  right: -100%;
+  width: 100%;
+  height: 100%;
+  z-index: 2000;
+  transition: right 0.4s cubic-bezier(0.05, 0.74, 0.2, 0.99);
+
+  &.open {
+    right: 0;
+  }
+
+  .sidebar-overlay {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.3);
+    backdrop-filter: blur(2px);
+  }
+
+  .sidebar-content {
+    position: absolute;
+    right: 0;
+    width: 450px;
+    height: 100%;
+    background: var(--sidebar-color);
+    box-shadow: -10px 0 30px rgba(0, 0, 0, 0.1);
+    display: flex;
+    flex-direction: column;
+  }
+
+  .sidebar-header {
+    padding: 25px;
+    gap: 10px;
+    background: var(--sidebar-color);
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    border-bottom: 1px solid #e2e8f0;
+
+    .btn-close {
+      height: 30px;
+      width: 30px;
+      border-radius: 8px;
+      border: none;
+      background: #f4f7fe;
+      color: var(--text-color);
+      font-size: 1.5rem;
+      line-height: 1;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      cursor: pointer;
+      transition: all 0.2s ease;
+      z-index: 10;
+
+      &:hover {
+        background: #fee2e2; // Color rojizo suave al pasar el mouse
+        color: #ee5d50; // Rojo para indicar "cerrar/salir"
+        transform: rotate(90deg); // Un toque visual moderno al girar
+      }
+
+      &:active {
+        transform: scale(0.9) rotate(90deg);
+      }
+    }
+    .order-number {
+      color: var(--text-color);
+      font-weight: 700;
+      font-size: 0.8rem;
+    }
+    h2 {
+      margin: 0;
+      font-size: 1.2rem;
+      color: var(--text-color);
+    }
+  }
+
+  .sidebar-body {
+    flex: 1;
+    padding: 25px;
+    overflow-y: auto;
+
+    .info-section {
+      margin-bottom: 30px;
+      label {
+        font-size: 0.75rem;
+        text-transform: uppercase;
+        color: var(--text-color);
+        font-weight: 800;
+        display: block;
+        margin-bottom: 12px;
+      }
+    }
+
+    .user-card {
+      display: flex;
+      align-items: center;
+      gap: 15px;
+      background: var(--sidebar-color);
+      padding: 15px;
+      border-radius: 16px;
+      .avatar {
+        width: 45px;
+        height: 45px;
+        background: var(--body-color);
+        color: var(--primary-color);
+        border-radius: 12px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-weight: 800;
+      }
+      h4 {
+        margin: 0;
+        color: var(--text-color);
+      }
+      p {
+        margin: 0;
+        font-size: 0.85rem;
+        color: var(--text-color);
+      }
+    }
+
+    .items-list {
+      background: var(--sidebar-color);
+      border-radius: 16px;
+      padding: 15px;
+      .item-row {
+        display: flex;
+        justify-content: space-between;
+        padding: 10px 0;
+        border-bottom: 1px dashed #f1f5f9;
+        font-size: 0.9rem;
+        .qty {
+          font-weight: 700;
+          color: var(--text-color);
+          width: 30px;
+        }
+        .name {
+          flex: 1;
+          color: var(--text-color);
+        }
+        .price {
+          font-weight: 600;
+          color: var(--text-color);
+        }
+      }
+    }
+  }
+
+  .financial-summary {
+    background: var(--body-color);
+    padding: 20px;
+    border-radius: 16px;
+    margin-top: 20px;
+    .summary-row {
+      display: flex;
+      justify-content: space-between;
+      margin-bottom: 8px;
+      color: var(--text-color);
+      font-weight: 500;
+      &.total {
+        margin-top: 15px;
+        padding-top: 15px;
+        border-top: 2px solid #f1f5f9;
+        font-weight: 800;
+        font-size: 1.1rem;
+      }
+      .debt {
+        color: var(--text-color);
+      }
+    }
+  }
+
+  .sidebar-footer {
+    padding: 20px 25px;
+    background: var(--sidebar-color);
+    border-top: 1px solid #e2e8f0;
+    display: flex;
+    gap: 12px;
+
+    .btn-action {
+      flex: 1;
+      padding: 14px;
+      border-radius: 12px;
+      font-weight: 700;
+      font-size: 0.9rem;
+      cursor: pointer;
+      transition: all 0.3s ease;
+      border: none;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 8px;
+
+      &.primary {
+        background: var(--primary-color);
+        color: var(--sidebar-color);
+
+        &:hover {
+          background: var(--primary-color);
+          transform: translateY(-2px);
+        }
+      }
+
+      &.secondary {
+        background: var(--body-color);
+        color: var(--text-color);
+
+        &:hover {
+          background: var(--text-color-alt);
+          color: var(--white-color);
+        }
+      }
+
+      &:active {
+        transform: translateY(0);
+      }
+
+      &:disabled {
+        background: var(--sidebar-color);
+        color: var(--text-color);
+        cursor: not-allowed;
+        box-shadow: none;
+      }
+    }
+  }
+
+  .btn-print-mini {
+    background: #f4f7fe;
+    color: #4318ff;
+    border: none;
+    width: 40px;
+    height: 40px;
+    border-radius: 10px;
+    cursor: pointer;
+    transition: all 0.2s;
+
+    &:hover {
+      background: #4318ff;
+      color: var(--sidebar-color);
+    }
+  }
+}
+
+.nuevo-abono-form {
+  margin-top: 25px;
+  padding: 20px;
+  background: #ffffff;
+  border: 2px solid #4318ff20;
+  border-radius: 20px;
+  animation: slideUp 0.3s ease-out;
+
+  h4 {
+    color: #2b3674;
+    margin-bottom: 15px;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+  }
+
+  .input-group {
+    margin-bottom: 15px;
+    label {
+      font-size: 0.8rem;
+      color: #a3aed0;
+      font-weight: 700;
+    }
+    input,
+    select {
+      width: 100%;
+      padding: 10px;
+      border-radius: 10px;
+      border: 1px solid #e0e5f2;
+      margin-top: 5px;
+      color: #2b3674;
+      font-weight: 600;
+    }
+    small {
+      color: #ee5d50;
+      font-weight: 600;
+      font-size: 0.75rem;
+    }
+  }
+
+  .form-actions {
+    display: flex;
+    gap: 10px;
+    margin-top: 15px;
+    button {
+      flex: 1;
+      padding: 10px;
+      border-radius: 10px;
+      font-weight: 700;
+      cursor: pointer;
+      border: none;
+    }
+    .btn-cancel {
+      background: #f4f7fe;
+      color: #a3aed0;
+    }
+    .btn-save {
+      background: #05cd99;
+      color: white;
+      &:disabled {
+        opacity: 0.5;
+      }
+    }
+  }
+}
+
+@keyframes slideUp {
+  from {
+    opacity: 0;
+    transform: translateY(10px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}

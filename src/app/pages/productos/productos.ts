@@ -20,6 +20,24 @@ export class Productos implements OnInit {
   showModal = false;
   productoForm: FormGroup;
   productos: Producto[] = [];
+  categorias = [
+    {
+      label: 'Todos',
+      active: true,
+    },
+    {
+      label: 'libros',
+      active: false,
+    },
+    {
+      label: 'uniformes',
+      active: false,
+    },
+    {
+      label: 'Pre-Icfes',
+      active: false,
+    },
+  ];
 
   constructor(private cd: ChangeDetectorRef) {
     this.productoForm = this.fb.group({
@@ -47,6 +65,7 @@ export class Productos implements OnInit {
     const dataProducto = await firstValueFrom(this.productSrv.getProductos());
     this.productos = dataProducto;
     this.subirEnMemoriaPro();
+    this.cd.detectChanges();
   }
 
   subirEnMemoriaPro() {
@@ -63,6 +82,17 @@ export class Productos implements OnInit {
     localStorage.removeItem('productos');
     this.showModal = false;
     this.productoForm.reset({ categoria: 'Uniforme', precio: 0, stock: 0 });
+  }
+
+  actualizarProductos() {
+    this.getSProducts();
+  }
+
+  activarCategoria(index: number) {
+    this.categorias.forEach((categoria) => {
+      categoria.active = false;
+    });
+    this.categorias[index].active = true;
   }
 
   async guardarProducto() {

@@ -1,0 +1,104 @@
+<div class="reporte-container">
+  <header class="header">
+    <div class="title-section">
+      <h2><i class="fas fa-clipboard-list"></i> Historial de Pedidos de Uniformes</h2>
+      <p>Consulte y gestione el estado de las entregas y pagos de dotación.</p>
+    </div>
+  </header>
+
+  <div class="metrics-grid">
+    <div class="card stat-card">
+      <div class="icon-circle blue"><i class="fas fa-shopping-bag"></i></div>
+      <div class="info">
+        <span>Pedidos Totales</span>
+        <h3>{{ totalPedidos }}</h3>
+      </div>
+    </div>
+    <div class="card stat-card">
+      <div class="icon-circle blue"><i class="fas fa-hand-holding-usd"></i></div>
+      <div class="info">
+        <span>Por Recaudar</span>
+        <h3>{{ totalPorRecaudar | currency }}</h3>
+      </div>
+    </div>
+  </div>
+
+  <div class="card filters-card">
+    <div class="filter-row">
+      <div class="input-group search">
+        <label>Buscar Estudiante</label>
+        <div class="input-with-icon">
+          <i class="fas fa-search"></i>
+          <input
+            type="text"
+            placeholder="Nombre o documento..."
+            [(ngModel)]="filtroNombre"
+            (input)="filtrarEstudiantes()"
+          />
+        </div>
+      </div>
+      <div class="input-group">
+        <label>Fecha Inicial</label>
+        <input type="date" [(ngModel)]="fechaInicio" [max]="fechaMaxima" />
+      </div>
+      <div class="input-group">
+        <label>Fecha Final</label>
+        <input type="date" [(ngModel)]="fechaFin" [max]="fechaMaxima" />
+      </div>
+      <button class="btn-consultar" (click)="consultar()">
+        <i class="fas fa-filter"></i> Filtrar
+      </button>
+    </div>
+  </div>
+
+  <div class="card table-card">
+    <table class="modern-table">
+      <thead>
+        <tr>
+          <th>Estudiante</th>
+          <th>Fecha</th>
+          <th>Total Pedido</th>
+          <th>Pagado</th>
+          <th>Estado</th>
+          <th>Acciones</th>
+        </tr>
+      </thead>
+      <tbody>
+        @for (p of pedidosFiltrados; track $index) {
+          <tr>
+            <td>
+              <div class="student-info">
+                <span class="name">{{ p.estudiante }}</span>
+              </div>
+            </td>
+            <td>{{ p.fecha | date: 'dd/MM/yyyy' }}</td>
+            <td>{{ p.total | currency }}</td>
+            <td>{{ p.abonoTotal | currency }}</td>
+            <td>
+              <span
+                class="badge"
+                [ngClass]="p.estadoPago === 'Pagado' ? 'bg-success' : 'bg-danger'"
+              >
+                {{ p.estadoPago }}
+              </span>
+            </td>
+            <td>
+              <div class="table-actions">
+                <button class="btn-icon" title="Ver Detalle" (click)="openModalDetalle(p)"><i class="bx bx-eye"></i></button>
+                <button class="btn-icon" title="Imprimir Recibo" (click)="imprimirRecibo(p)">
+                  <i class="bx bx-printer"></i>
+                </button>
+              </div>
+            </td>
+          </tr>
+        }
+      </tbody>
+    </table>
+  </div>
+</div>
+
+<app-detalle-pedido 
+  [isOpen]="panelDetalleAbierto" 
+  [pedido]="pedidoSeleccionado"
+  (onClose)="cerrarPanel()">
+</app-detalle-pedido>

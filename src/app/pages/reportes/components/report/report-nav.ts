@@ -28,4 +28,11 @@ export const navIconsReport: NavbarInterface[] = [
     label: 'Reporte mensual',
     active: false,
   },
+  {
+    routerLink: 'report-uniforme',
+    icon: 'bx bx-t-shirt',
+    label: 'Reporte de Uniformes',
+    detalle: 'Reporte de ventas de uniformes entre fechas.',
+    active: false,
+  },
 ];

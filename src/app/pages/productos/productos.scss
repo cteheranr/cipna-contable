@@ -7,8 +7,15 @@
     align-items: center;
     margin-bottom: 30px;
 
-    h2 { color: var(--text-color); font-weight: 700; margin: 0; }
+    h1 { color: var(--text-color); font-weight: 700; margin: 0; }
     p { color: var(--text-color); margin: 0; }
+
+    .btn {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 10px;
+    }
   }
 
   .btn-nuevo {
@@ -41,6 +48,11 @@
       input { border: none; outline: none; width: 100%; color: var(--primary-color); }
     }
 
+    .categories {
+      display: flex;
+      gap: 5px;
+    }
+
     .chip {
       padding: 8px 16px;
       background: var(--sidebar-color);
@@ -50,6 +62,15 @@
       color: var(--text-color);
       &.active { background: var(--primary-color); color: white; }
     }
+  }
+
+  .text-content {
+    display: flex;
+    width: 100%;
+    align-items: center;
+    justify-content: center;
+    padding: 40px;
+    color: var(--text-color);
   }
 
   .products-grid {

@@ -1,12 +1,17 @@
 <div class="productos-container">
   <div class="header-section">
     <div>
-      <h2>Catálogo de Productos</h2>
+      <h1>Catálogo de Productos</h1>
       <p>Gestiona uniformes, libros y servicios académicos.</p>
     </div>
-    <button class="btn-nuevo" (click)="abrirModalNuevo()">
-      <i class="fas fa-plus"></i> Nuevo Producto
-    </button>
+    <div class="btn">
+      <button class="btn-nuevo" (click)="actualizarProductos()">
+        <i class="bx bx-refresh-cw"></i> Actualizar Productos
+      </button>
+      <button class="btn-nuevo" (click)="abrirModalNuevo()">
+        <i class="bx bx-plus"></i> Nuevo Producto
+      </button>
+    </div>
   </div>
 
   <div class="filters-bar">
@@ -15,33 +20,45 @@
       <input type="text" placeholder="Buscar por nombre..." />
     </div>
     <div class="categories">
-      <span class="chip active">Todos</span>
-      <span class="chip">Uniformes</span>
-      <span class="chip">Libros</span>
-      <span class="chip">Pre-Icfes</span>
+      @for (cat of categorias; track $index) {
+        <span
+          class="chip"
+          (click)="activarCategoria($index)"
+          [ngClass]="cat.active ? 'active' : ''"
+          >{{ cat.label }}</span
+        >
+      }
     </div>
   </div>
 
-  <div class="products-grid">
-    <div class="product-card" *ngFor="let p of productos">
-      <div class="badge" [ngClass]="{ 'low-stock': p.stock < 5 }">
-        {{ p.stock > 0 ? p.stock + ' en stock' : 'Agotado' }}
-      </div>
-      <div class="img-placeholder">
-        <i class="fas fa-box-open"></i>
-        <img [src]="" />
-      </div>
-      <div class="card-info">
-        <span class="category-tag">{{ p.categoria }}</span>
-        <h3>{{ p.nombre }}</h3>
-        <p class="price">{{ p.precio | currency }}</p>
-        <div class="actions">
-          <button class="btn-icon edit"><i class="fas fa-edit"></i></button>
-          <button class="btn-icon delete"><i class="fas fa-trash"></i></button>
+  @if (productos.length > 0) {
+    <div class="products-grid">
+      @for (p of productos; track $index) {
+        <div class="product-card">
+          <div class="badge" [ngClass]="{ 'low-stock': p.stock < 5 }">
+            {{ p.stock > 0 ? p.stock + ' en stock' : 'Agotado' }}
+          </div>
+          <div class="img-placeholder">
+            <i class="fas fa-box-open"></i>
+            <img [src]="" />
+          </div>
+          <div class="card-info">
+            <span class="category-tag">{{ p.categoria }}</span>
+            <h3>{{ p.nombre }}</h3>
+            <p class="price">{{ p.precio | currency }}</p>
+            <div class="actions">
+              <button class="btn-icon edit"><i class="fas fa-edit"></i></button>
+              <button class="btn-icon delete"><i class="fas fa-trash"></i></button>
+            </div>
+          </div>
         </div>
-      </div>
+      }
     </div>
-  </div>
+  } @else {
+    <div class="text-content">
+      <h3>En este momento no hay productos registrados</h3>
+    </div>
+  }
 </div>
 
 @if (showModal) {

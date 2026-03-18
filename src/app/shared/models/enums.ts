@@ -31,3 +31,8 @@ export enum TipoDocumento {
   PAS = 'PAS',
   OTRO = 'OTRO'
 }
+
+export enum EstadoEntrega {
+  ENTREGADO = 'Entregado',
+  PENDIENTE = 'Pendiente'
+}

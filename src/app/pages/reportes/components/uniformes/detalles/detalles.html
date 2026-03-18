@@ -1,0 +1,104 @@
+@if (pedido) {
+  <div class="detail-sidebar" [class.open]="isOpen">
+    <div class="sidebar-overlay" (click)="close()"></div>
+    <div class="sidebar-content">
+      <header class="sidebar-header">
+        <button class="btn-close" (click)="close()">&times;</button>
+        <div class="header-info">
+          <span class="order-number">Pedido de {{ pedido.estudiante }}</span>
+          <h2>Detalles de la Venta</h2>
+        </div>
+      </header>
+
+      <div class="sidebar-body">
+        <section class="info-section">
+          <label>Estudiante</label>
+          <div class="user-card">
+            <div class="avatar">{{ pedido.estudiante.charAt(0) }}</div>
+            <div>
+              <h4>{{ pedido.estudiante }}</h4>
+            </div>
+          </div>
+        </section>
+
+        <section class="info-section">
+          <label>Artículos Pedidos</label>
+          <div class="items-list">
+            @for (item of pedido.items; track $index) {
+              <div class="item-row">
+                <span class="qty">{{ item.cantidad }}x</span>
+                <span class="name">{{ item.nombre }}</span>
+                <span class="price">{{ item.total | currency }}</span>
+              </div>
+            }
+          </div>
+        </section>
+
+        <section class="financial-summary">
+          <div class="summary-row">
+            <span>Subtotal</span>
+            <span>{{ pedido.total | currency }}</span>
+          </div>
+          <div class="summary-row payment">
+            <span>Abonado</span>
+            <span class="text-success">- {{ pedido.abonoTotal | currency }}</span>
+          </div>
+          <div class="summary-row total">
+            <span>Saldo Restante</span>
+            <span [class.debt]="pedido.total - abonoTotal > 0">
+              {{ pedido.total - pedido.abonoTotal | currency }}
+            </span>
+          </div>
+        </section>
+      </div>
+      @if (mostrandoFormAbono) {
+        <section class="nuevo-abono-form">
+          <h4><i class="fas fa-cash-register"></i> Registrar Pago</h4>
+
+          <div class="input-group">
+            <label>Monto a Abonar</label>
+            <input
+              type="number"
+              [(ngModel)]="nuevoAbonoMonto"
+              [max]="saldoRestante"
+              placeholder="0.00"
+            />
+            <small>Saldo pendiente: {{ saldoRestante | currency }}</small>
+          </div>
+          <div class="input-group">
+            <label>Numero de Comprobante</label>
+            <input
+              type="text"
+              [(ngModel)]="nComprobante"
+              placeholder="N20488595"
+            />
+          </div>
+
+          <div class="form-actions">
+            <button class="btn-cancel" (click)="mostrandoFormAbono = false">Cancelar</button>
+            <button
+              class="btn-save"
+              (click)="confirmarAbono()"
+              [disabled]="nuevoAbonoMonto <= 0 || nuevoAbonoMonto > saldoRestante"
+            >
+              Confirmar Pago
+            </button>
+          </div>
+        </section>
+      }
+      @if (!mostrandoFormAbono) {
+        <footer class="sidebar-footer">
+          <button class="btn-action secondary" (click)="close()">Cerrar</button>
+          @if (pedido.total - pedido.abonoTotal > 0) {
+            <button class="btn-action primary" (click)="mostrandoFormAbono = true">
+              Registrar Nuevo Abono
+            </button>
+          }
+          @if (pedido.total - pedido.abonoTotal === 0) {
+            <button class="btn-action primary">Reportar entregado</button>
+          }
+        </footer>
+      }
+    </div>
+  </div>
+}

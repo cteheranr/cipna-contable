@@ -53,8 +53,8 @@
 
   .page-header {
     margin-bottom: 40px;
-    h1 { color: var(--primary-color); font-weight: 800; font-size: 2.2rem; margin: 0; }
-    p { color: var(--primary-color); font-size: 1.1rem; margin-top: 8px; }
+    h1 { color: var(--text-color); font-weight: 800; font-size: 2.2rem; margin: 0; }
+    p { color: var(--text-color); font-size: 1.1rem; margin-top: 8px; }
   }
 
   .options-grid {
@@ -106,7 +106,7 @@
     }
 
     .card-content {
-      h3 { color: var(--primary-color); font-weight: 700; margin: 0; font-size: 1.2rem; }
+      h3 { color: var(--text-color); font-weight: 700; margin: 0; font-size: 1.2rem; }
       p { color: var(--text-color); margin: 5px 0 0 0; font-size: 0.9rem; line-height: 1.4; }
     }
 

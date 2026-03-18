@@ -35,21 +35,31 @@
     <div class="card action-card">
       <h3>Acciones Rápidas</h3>
       <div class="button-list">
-        <button routerLink="/ventas/factura" class="btn-action">
-          <i class="fas fa-plus"></i> Nueva Factura
+        <button
+          routerLink="/ventas/factura"
+          class="btn-action"
+          (click)="redireccion('cartera/facturas')"
+        >
+          <i class="fas fa-plus"></i> Nuevo Recibo de Caja
         </button>
-        <button routerLink="/estudiantes" class="btn-action secondary">
-          <i class="fas fa-user-plus"></i> Registrar Estudiante
+        <button
+          routerLink="/estudiantes"
+          class="btn-action secondary"
+          (click)="redireccion('productos')"
+        >
+          <i class="fas fa-user-plus"></i> Registrar Producto
         </button>
       </div>
     </div>
 
     <div class="card activity-card">
       <h3>Últimos Movimientos</h3>
-      <div class="empty-state" *ngIf="movimientos.length === 0">
-        <img src="https://undraw.co/api/illustrations/svg/empty" alt="Sin datos" />
-        <p>No hay transacciones recientes para mostrar.</p>
-      </div>
+      @if (movimientos.length === 0) {
+        <div class="empty-state">
+          <i class="icon bx bx-empty-set" ></i>
+          <p>No hay transacciones recientes para mostrar.</p>
+        </div>
+      }
     </div>
   </div>
 </div>
