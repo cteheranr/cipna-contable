@@ -4,6 +4,8 @@ import { Pedido, PedidoLibro } from '../../../../shared/models/producto.model';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { PedidosLibrosService } from '../../../../service/PedidosLibros/PedidosLibros';
+import jsPDF from 'jspdf';
+import autoTable from 'jspdf-autotable';
 
 @Component({
   selector: 'app-report-libro',
@@ -22,6 +24,8 @@ export class ReportLibro {
   fechaFin: string = '';
   filtroNombre: string = '';
   estudiantesFiltrados: Estudiante[] = [];
+  hoyVentasTransf: number = 0;
+  hoyVentasDatafono: number = 0;
   estudiantesFiltradosAux: Estudiante[] = [];
 
   totalPedidos = 0;
@@ -68,5 +72,77 @@ export class ReportLibro {
     } else {
       this.pedidosFiltrados = this.AllPedidos;
     }
+  }
+
+  sumarMetodo(metodo: string, monto: number) {
+    if (metodo === 'transferencia') {
+      this.hoyVentasTransf += monto;
+    }
+
+    if (metodo === 'datafono') {
+      this.hoyVentasDatafono += monto;
+    }
+  }
+
+  imprimirReporte() {
+    const doc = new jsPDF();
+
+    doc.setFontSize(18);
+    doc.text('Reporte de Ventas de Libros', 14, 15);
+
+    doc.setFontSize(12);
+    if (this.fechaInicio) {
+      doc.text(`Fecha: ${this.fechaInicio} - ${this.fechaFin}`, 14, 25);
+    } else {
+      doc.text(`Fecha: 2026-03-20 a ${new Date().toISOString().split('T')[0]}`, 14, 25);
+    }
+
+    // Totales
+    doc.text(`Total ventas: ${this.totalPedidos}`, 14, 40);
+    doc.text(`Total transferencia: $${this.totalRecaudado.toLocaleString()}`, 14, 48);
+    doc.text(`Total datáfono: $${this.hoyVentasTransf.toLocaleString()}`, 14, 56);
+    doc.text(`Total datáfono: $${this.hoyVentasDatafono.toLocaleString()}`, 14, 64);
+    doc.text(`Total ventas del día: $${this.totalRecaudado.toLocaleString()}`, 14, 72);
+
+    const rows = this.pedidosFiltrados.map((r) => [
+      r.estudiante,
+      this.obtenerItem(r),
+      r.total,
+      this.obtenerMetodo(r),
+    ]);
+
+    autoTable(doc, {
+      startY: 85, // empieza la tabla debajo de los totales
+      head: [['Estudiante', 'Concepto', 'Monto', 'Método']],
+      body: rows,
+    });
+
+    let finalY = (doc as any).lastAutoTable.finalY + 10;
+
+    doc.setFontSize(14);
+
+    doc.save(`reporte-libros-${this.fechaInicio}.pdf`);
+  }
+
+  obtenerItem(pedido: any) {
+    let pedidoT = '';
+    if (pedido.items.length > 1) {
+      for (let i = 0; i < pedido.items.length; i++) {
+        pedidoT += pedido.items[i].nombre;
+      }
+      return pedidoT;
+    }
+    return pedido.items[0].nombre;
+  }
+
+  obtenerMetodo(pedido: any) {
+    let metodos = '';
+    if (pedido.metodoDePago.length > 1) {
+      for (let i = 0; i < pedido.metodoDePago.length; i++) {
+        metodos += pedido.metodoDePago[i].metodo + ' (' + pedido.metodoDePago[i].nComprobante + ')';
+      }
+      return metodos;
+    }
+    return pedido.metodoDePago[0].metodo + ' (' + pedido.metodoDePago[0].nComprobante + ')';
   }
 }
