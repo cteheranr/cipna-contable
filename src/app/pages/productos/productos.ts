@@ -72,6 +72,7 @@ export class Productos implements OnInit {
 
   async getSProducts() {
     const dataProducto = await firstValueFrom(this.productSrv.getProductos());
+    console.log("DATA", dataProducto);
     this.productos = dataProducto;
     this.productosAll = dataProducto;
     this.subirEnMemoriaPro();
