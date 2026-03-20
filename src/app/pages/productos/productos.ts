@@ -1,6 +1,12 @@
 import { CommonModule } from '@angular/common';
 import { ChangeDetectorRef, Component, inject, OnInit } from '@angular/core';
-import { FormBuilder, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
+import {
+  FormBuilder,
+  FormGroup,
+  FormsModule,
+  ReactiveFormsModule,
+  Validators,
+} from '@angular/forms';
 import { ProductoService } from '../../service/productoSrv/productoSrv';
 import { Producto } from '../../shared/models/producto.model';
 import { firstValueFrom } from 'rxjs';
@@ -8,7 +14,7 @@ import { NotificationService } from '../../service/notificaciones/notificaciones
 
 @Component({
   selector: 'app-productos',
-  imports: [CommonModule, ReactiveFormsModule],
+  imports: [CommonModule, ReactiveFormsModule, FormsModule],
   templateUrl: './productos.html',
   styleUrl: './productos.scss',
 })
@@ -18,19 +24,21 @@ export class Productos implements OnInit {
   private notifService = inject(NotificationService);
 
   showModal = false;
+  busquedaProducto = '';
   productoForm: FormGroup;
   productos: Producto[] = [];
+  productosAll: Producto[] = [];
   categorias = [
     {
       label: 'Todos',
       active: true,
     },
     {
-      label: 'libros',
+      label: 'Libro',
       active: false,
     },
     {
-      label: 'uniformes',
+      label: 'Uniforme',
       active: false,
     },
     {
@@ -56,6 +64,7 @@ export class Productos implements OnInit {
 
     if (data) {
       this.productos = JSON.parse(data);
+      this.productosAll = JSON.parse(data);
     } else {
       this.getSProducts();
     }
@@ -64,12 +73,13 @@ export class Productos implements OnInit {
   async getSProducts() {
     const dataProducto = await firstValueFrom(this.productSrv.getProductos());
     this.productos = dataProducto;
+    this.productosAll = dataProducto;
     this.subirEnMemoriaPro();
     this.cd.detectChanges();
   }
 
   subirEnMemoriaPro() {
-    localStorage.setItem('productos', JSON.stringify(this.productos));
+    localStorage.setItem('productos', JSON.stringify(this.productosAll));
     this.getSProductsLocal();
     this.cd.detectChanges();
   }
@@ -93,6 +103,14 @@ export class Productos implements OnInit {
       categoria.active = false;
     });
     this.categorias[index].active = true;
+
+    if (this.categorias[index].label === 'Todos') {
+      this.productos = this.productosAll;
+    } else {
+      this.productos = this.productosAll.filter(
+        (p) => p.categoria === this.categorias[index].label,
+      );
+    }
   }
 
   async guardarProducto() {
@@ -110,6 +128,26 @@ export class Productos implements OnInit {
         console.error('Error guardando producto:', error);
         this.notifService.showNotification('Error guardando el producto', 'error');
       }
+    }
+  }
+
+  filtrarProductos() {
+    if (this.busquedaProducto.length > 2) {
+      const data = localStorage.getItem('estudiantes');
+      this.productos = this.productosAll;
+      this.categorias.map((cat) => {
+        cat.active = false;
+      });
+      if (data) {
+        this.productos = this.productosAll
+          .filter((e) => e.nombre.toLowerCase().includes(this.busquedaProducto.toLowerCase()))
+          .slice(0, 5);
+      }
+    } else {
+      this.productos = this.productosAll;
+      const index = this.categorias.findIndex((cat) => cat.label === 'Todos'
+      );
+      this.categorias[index].active = true;
     }
   }
 }

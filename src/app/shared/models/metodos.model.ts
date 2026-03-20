@@ -1,4 +1,5 @@
 export interface Metodos {
-  metodo: string,
-  monto: number
+  metodo: string | null,
+  monto: number,
+  nComprobante?: string,
 }

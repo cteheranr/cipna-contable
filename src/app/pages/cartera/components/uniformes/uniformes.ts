@@ -4,7 +4,7 @@ import { FormsModule } from '@angular/forms';
 import { CommonModule } from '@angular/common';
 import { Estudiante } from '../../../../shared/models/estudiantes.model';
 import { Estudiantes } from '../../../estudiantes/estudiantes';
-import { Pedido, PedidosUniforme, Producto } from '../../../../shared/models/producto.model';
+import { Pedido, PedidosItem, Producto } from '../../../../shared/models/producto.model';
 import { EstadoEntrega } from '../../../../shared/models/enums';
 import { PedidosService } from '../../../../service/PedidosUniformes/pedidosUnSrv';
 import { NotificationService } from '../../../../service/notificaciones/notificaciones';
@@ -30,7 +30,7 @@ export class Uniformes implements OnInit {
 
   productoActual: Producto | null = null;
   cantidadActual = 0;
-  pedido: PedidosUniforme[] = [];
+  pedido: PedidosItem[] = [];
   totalPedido = 0;
   montoAbono = 0;
   entregado: boolean = false;

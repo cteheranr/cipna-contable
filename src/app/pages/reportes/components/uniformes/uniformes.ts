@@ -17,7 +17,6 @@ import { Detalles } from './detalles/detalles';
 export class RepUniformes implements OnInit {
   private PedidosService = inject(PedidosService);
   private cd = inject(ChangeDetectorRef);
-  private studentService = inject(StudentService);
   pedidoSeleccionado: any;
   panelDetalleAbierto: boolean = false;
 

@@ -162,7 +162,7 @@ export class Facturas implements OnInit {
             <h2>RECIBO DE PAGO</h2>
             <div class="line"><strong>ID:</strong> ${recibo.id}</div>
             <div class="line"><strong>Estudiante:</strong> ${recibo.estudianteDoc}</div>
-            <div class="line"><strong>Concepto:</strong> ${recibo.concepto}</div>
+            <div class="line"><strong>Concepto:</strong> ${recibo.notas}</div>
             <div class="line"><strong>Monto Total:</strong> $${recibo.monto}</div>
 
             <div class="line"><strong>Método #1:</strong> ${recibo.metodo1}</div>
@@ -214,7 +214,7 @@ export class Facturas implements OnInit {
         <h2>RECIBO DE PAGO</h2>
         <div class="line"><strong>ID:</strong> ${recibo.id}</div>
         <div class="line"><strong>Estudiante:</strong> ${recibo.estudianteDoc}</div>
-        <div class="line"><strong>Concepto:</strong> ${recibo.concepto}</div>
+        <div class="line"><strong>Concepto:</strong> ${recibo.notas}</div>
         <div class="line"><strong>Monto:</strong> $${recibo.monto}</div>
         <div class="line"><strong>Método:</strong> ${recibo.metodo}</div>
         <div class="line"><strong>Monto Numero de aprobación:</strong> $${recibo.numeroAprobacion}</div>

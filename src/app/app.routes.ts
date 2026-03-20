@@ -22,6 +22,7 @@ import { Mensual } from './pages/reportes/components/mensual/mensual';
 import { Report } from './pages/reportes/components/report/report';
 import { Egresos } from './pages/egresos/egresos';
 import { RepUniformes } from './pages/reportes/components/uniformes/uniformes';
+import { ReportLibro } from './pages/reportes/components/report-libro/report-libro';
 
 export const routes: Routes = [
   {
@@ -107,6 +108,10 @@ export const routes: Routes = [
           {
             path: 'report-uniforme',
             component: RepUniformes,
+          },
+          {
+            path: 'report-libros',
+            component: ReportLibro,
           },
         ]
       },

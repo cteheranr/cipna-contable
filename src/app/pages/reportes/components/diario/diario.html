@@ -96,7 +96,7 @@
             <td>{{ rep.metodo }}</td>
             <td><strong>{{ rep.monto | currency }}</strong></td>
             <td class="acciones">
-              <button class="btn-table" title="descargar pdf">
+              <button class="btn-table" title="descargar pdf" (click)="imprimir(rep)">
                 <i class="bx bx-file-detail"></i>
               </button>
             </td>

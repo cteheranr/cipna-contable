@@ -17,7 +17,7 @@
   <div class="filters-bar">
     <div class="search-box">
       <i class="fas fa-search"></i>
-      <input type="text" placeholder="Buscar por nombre..." />
+      <input type="text" placeholder="Buscar por nombre..." [(ngModel)]="busquedaProducto" (input)="filtrarProductos()"/>
     </div>
     <div class="categories">
       @for (cat of categorias; track $index) {

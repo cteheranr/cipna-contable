@@ -1,0 +1,192 @@
+.venta-container {
+  .header {
+    margin-bottom: 25px;
+    h2 {
+      color: var(--text-color);
+      font-weight: 800;
+      margin: 0;
+    }
+    p {
+      color: var(--text-color);
+    }
+  }
+
+  .venta-grid {
+    display: grid;
+    grid-template-columns: 1fr 400px;
+    gap: 25px;
+  }
+
+  .card {
+    background: var(--sidebar-color);
+    padding: 25px;
+    border-radius: 20px;
+
+    h3 {
+      color: var(--text-color);
+      font-size: 1.1rem;
+      padding-bottom: 15px;
+    }
+  }
+
+  .input-group {
+    margin-bottom: 18px;
+    position: relative;
+    label {
+      display: block;
+      color: var(--text-color);
+      font-weight: 600;
+      margin-bottom: 8px;
+      font-size: 0.9rem;
+    }
+    input,
+    select {
+      width: 100%;
+      padding: 12px;
+      border: 1px solid var(--body-color);
+      border-radius: 12px;
+      &:focus {
+        border-color: var(--primary-color);
+        outline: none;
+      }
+    }
+  }
+
+  .autocomplete-results {
+    position: absolute;
+    width: 100%;
+    background: var(--sidebar-color);
+    border-radius: 12px;
+    box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1);
+    z-index: 10;
+    list-style: none;
+    padding: 0;
+    li {
+      color: var(--text-color);
+      padding: 12px;
+      cursor: pointer;
+      border-bottom: 1px solid var(--body-color);
+      &:hover {
+        background: var(--body-color);
+      }
+      span {
+        font-size: 0.8rem;
+        color: var(--text-color);
+      }
+    }
+  }
+
+  .items-table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-bottom: 20px;
+    th {
+      text-align: left;
+      font-size: 0.8rem;
+      color: var(--text-color);
+      padding: 10px 0;
+    }
+    td {
+      padding: 10px 0;
+      font-size: 0.9rem;
+      color: var(--text-color);
+      border-bottom: 1px solid var(--primary-color);
+    }
+  }
+
+  .totals-box {
+    background: var(--sidebar-color);
+    padding: 20px;
+    border-radius: 15px;
+
+    .total-row {
+      display: flex;
+      justify-content: space-between;
+      margin-bottom: 10px;
+      strong {
+        color: var(--primary-color);
+        font-size: 1.2rem;
+      }
+      span {
+        color: var(--text-color);
+      }
+    }
+    .saldo strong {
+      color: var(--primary-color);
+    }
+  }
+
+  .btn-confirm,
+  .btn-add {
+    width: 100%;
+    margin-top: 20px;
+    padding: 15px;
+    background: var(--primary-color);
+    color: var(--white-color);
+    border: none;
+    border-radius: 12px;
+    font-weight: 700;
+    cursor: pointer;
+    &:disabled {
+      opacity: 0.5;
+      cursor: not-allowed;
+    }
+  }
+
+  .selected-badge {
+    color: var(--text-color);
+  }
+
+  .payment-methods {
+    margin: 20px 0;
+
+    .section-label {
+      display: block;
+      color: var(--text-color);
+      font-weight: 700;
+      font-size: 0.85rem;
+      margin-bottom: 12px;
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+    }
+
+    .methods-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 10px;
+    }
+
+    .method-chip {
+      background: var(--sidebar-color);
+      border: 2px solid transparent;
+      border-radius: 12px;
+      padding: 12px 8px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 8px;
+      cursor: pointer;
+      transition: all 0.2s ease;
+      color: var(--text-color);
+
+      i {
+        font-size: 1.2rem;
+      }
+      span {
+        font-size: 0.75rem;
+        font-weight: 600;
+      }
+
+      &:hover {
+        background: var(--body-color);
+        color: var(--text-color);
+      }
+
+      &.active {
+        background: var(--primary-color);
+        color: var(--white-color);
+        border-color: var(--body-color);
+      }
+    }
+  }
+}

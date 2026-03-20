@@ -1,4 +1,5 @@
 import { EstadoEntrega } from "./enums";
+import { Metodos } from "./metodos.model";
 
 export interface Producto {
   id?: string;
@@ -9,7 +10,7 @@ export interface Producto {
   activo: boolean;
 }
 
-export interface PedidosUniforme {
+export interface PedidosItem {
   categoria: string;
   nombre: string;
   precio: number;
@@ -23,7 +24,7 @@ export interface Pedido {
   id?: string;
   estudiante: string;
   categoria: string;
-  items: PedidosUniforme[];
+  items: PedidosItem[];
   total: number;
   abono: Abono[];
   abonoTotal: number;
@@ -38,3 +39,14 @@ export interface Abono {
   numeroComprobante: string;
   fecha: string;
 } 
+
+export interface PedidoLibro {
+  id?: string;
+  estudiante: string;
+  categoria: string;
+  items: PedidosItem[];
+  total: number;
+  abonoTotal: number;
+  metodoDePago: Metodos[];
+  fecha: string;
+}

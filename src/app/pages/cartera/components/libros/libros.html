@@ -1,1 +1,148 @@
-<app-construccion></app-construccion>
+<div class="venta-container">
+  <header class="header">
+    <h2><i class="fas fa-tshirt"></i> Venta de Libros</h2>
+    <p>Registra pedidos para libros estudiantiles.</p>
+  </header>
+
+  <div class="venta-grid">
+    <div class="form-side">
+      <div class="card">
+        <h3><i class="fas fa-search"></i> 1. Información del Pedido</h3>
+
+        <div class="input-group">
+          <label>Estudiante (Nombre o Documento)</label>
+          <input
+            type="text"
+            [(ngModel)]="busquedaEstudiante"
+            (input)="filtrarEstudiantes()"
+            placeholder="Escribe para buscar..."
+          />
+          @if (estudiantesFiltrados.length > 0) {
+            <ul class="autocomplete-results">
+              @for (item of estudiantesFiltrados; track item.id) {
+                <li (click)="seleccionarEstudiante(item)">
+                  {{ item.nombres + ' ' + item.apellidos }} -
+                  <span>{{ item.numeroDocumento }}</span>
+                </li>
+              }
+            </ul>
+          }
+          @if (estudianteSeleccionado) {
+            <div class="selected-badge">
+              Seleccionado:
+              <strong>{{
+                estudianteSeleccionado.nombres + ' ' + estudianteSeleccionado.apellidos
+              }}</strong>
+            </div>
+          }
+        </div>
+
+        <div class="input-group">
+          <label>Seleccionar Libro/Kit</label>
+          <select [(ngModel)]="productoActual">
+            <option [ngValue]="null">Elija un libro...</option>
+            @for (prod of listaProductos; track $index) {
+              <option [ngValue]="prod">{{ prod.nombre }}</option>
+            }
+          </select>
+        </div>
+
+        <div class="row">
+          <div class="input-group">
+            <label>Cantidad</label>
+            <input type="number" [(ngModel)]="cantidadActual" min="1" />
+          </div>
+          <button class="btn-add" (click)="agregarAlPedido()" [disabled]="!productoActual || cantidadActual < 1">
+            <i class="fas fa-plus"></i> Agregar
+          </button>
+        </div>
+      </div>
+    </div>
+
+    <div class="summary-side">
+      <div class="card summary-card">
+        <h3><i class="fas fa-shopping-cart"></i> Resumen del Pedido</h3>
+
+        <table class="items-table">
+          <thead>
+            <tr>
+              <th>Libro</th>
+              <th>Cant.</th>
+              <th>Subtotal</th>
+            </tr>
+          </thead>
+          <tbody>
+            @for (item of pedido; track $index) {
+              <tr (click)="eliminarProducto($index)">
+                <td>{{ item.nombre }}</td>
+                <td>{{ item.cantidad }}</td>
+                <td>{{ item.total | currency }}</td>
+              </tr>
+            }
+          </tbody>
+        </table>
+
+        <div class="totals-box">
+          <div class="total-row">
+            <span>Total Pedido:</span>
+            <strong>{{ totalPedido | currency }}</strong>
+          </div>
+
+          @for (item of montoAbono; track $index) {
+            <div class="input-group">
+              <label>Metodo de pago</label>
+              <select [(ngModel)]="item.metodo">
+                <option [ngValue]="null">Elija un Metodo...</option>
+                @for (prod of listaMetodos; track $index) {
+                  <option [ngValue]="prod">{{ prod }}</option>
+                }
+              </select>
+            </div>
+            <div class="input-group abono">
+              <label>Monto del Abono ($)</label>
+              <input type="number" [(ngModel)]="item.monto" placeholder="0.00" />
+            </div>
+            <div class="input-group abono">
+              <label>Numero del Comprobante</label>
+              <input type="text" [(ngModel)]="item.nComprobante" placeholder="M0237477" />
+            </div>
+          }
+
+          <div class="total-row saldo">
+            <span>Saldo Restante:</span>
+            <strong class="text-danger">{{ totalPedido - getMontoAbono | currency }}</strong>
+          </div>
+        </div>
+
+        <button
+          class="btn-confirm"
+          (click)="aggMetodoPago()"
+          [disabled]="
+            pedido.length === 0 ||
+            !estudianteSeleccionado ||
+            !montoAbono[montoAbono.length - 1].metodo ||
+            confirmarPago
+          "
+        >
+          <i class="fas fa-save"></i> Agregar Metodo de pago
+        </button>
+
+        @if (montoAbono.length > 1) {
+          <button class="btn-confirm" (click)="deleteMetodoPago()">
+            <i class="fas fa-save"></i> Eliminar ultimo metodo
+          </button>
+        }
+
+        <button
+          class="btn-confirm"
+          (click)="registrarVenta()"
+          [disabled]="
+            pedido.length === 0 || !estudianteSeleccionado || !confirmarPago || !confirmarMetodos
+          "
+        >
+          <i class="fas fa-save"></i> Registrar y Generar Comprobante
+        </button>
+      </div>
+    </div>
+  </div>
+</div>

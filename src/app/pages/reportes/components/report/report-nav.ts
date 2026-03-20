@@ -35,4 +35,11 @@ export const navIconsReport: NavbarInterface[] = [
     detalle: 'Reporte de ventas de uniformes entre fechas.',
     active: false,
   },
+  {
+    routerLink: 'report-libros',
+    icon: 'bx bx-book-open',
+    label: 'Reporte de Libros',
+    detalle: 'Reporte de ventas de libros entre fechas.',
+    active: false,
+  },
 ];

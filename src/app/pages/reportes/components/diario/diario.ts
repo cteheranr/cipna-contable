@@ -290,4 +290,107 @@ export class Diario {
 
     saveAs(blob, `reporte-${this.fecha}.xlsx`);
   }
+
+  imprimir(recibo: any){
+    const ventana = window.open('', '_blank', 'width=800,height=600');
+    const usuario = localStorage.getItem('currentUser');
+
+    if (!ventana) return;
+
+    if (recibo.metodo === 'mixto' && usuario) {
+      ventana.document.write(`
+        <html>
+          <head>
+            <title>Recibo ${recibo.id}</title>
+            <style>
+              body { font-family: Arial; padding: 30px; }
+              h2, h3, p { text-align: center; }
+              .line { margin: 10px 0; }
+            </style>
+          </head>
+          <body>
+            <h3>INSTITUTO EDUCATIVO</h3>
+            <h2>NUEVA AMERICA</h2>
+            <p>NIT: 800008061-8</p>
+            <p>Nuevo Bosque Mz 52 Lt 02 etapa 7</p>
+            <p>Cartagena, Bolívar.</p>
+            <p>Tel. 605 6654780</p>
+
+            <h2>RECIBO DE PAGO</h2>
+            <div class="line"><strong>ID:</strong> ${recibo.id}</div>
+            <div class="line"><strong>Estudiante:</strong> ${recibo.estudianteDoc}</div>
+            <div class="line"><strong>Concepto:</strong> ${recibo.notas}</div>
+            <div class="line"><strong>Monto Total:</strong> $${recibo.monto}</div>
+
+            <div class="line"><strong>Método #1:</strong> ${recibo.metodo1}</div>
+            <div class="line"><strong>Monto Total:</strong> $${recibo.monto1}</div>
+            <div class="line"><strong>Monto Numero de aprobación metodo 1:</strong> $${recibo.numeroAprobacion1}</div>
+
+            <div class="line"><strong>Método #2:</strong> ${recibo.metodo2}</div>
+            <div class="line"><strong>Monto Total:</strong> $${recibo.monto2}</div>
+            <div class="line"><strong>Monto Numero de aprobación metodo 2:</strong> $${recibo.numeroAprobacion2}</div>
+
+            <div class="line"><strong>Método #3:</strong> ${recibo.metodo3}</div>
+            <div class="line"><strong>Monto Total:</strong> $${recibo.monto3}</div>
+            <div class="line"><strong>Monto Numero de aprobación metodo 3:</strong> $${recibo.numeroAprobacion3}</div>
+
+
+            <div class="line"><strong>Fecha:</strong> ${new Date().toLocaleString()}</div>
+            <div class="line"><strong>Responsable:</strong> ${usuario.split('@')[0]}</div>
+
+            <script>
+              window.onload = function() {
+                window.print();
+                window.onafterprint = function() {
+                  window.close();
+                }
+              }
+            <\/script>
+          </body>
+        </html>
+      `);
+    } else {
+      ventana.document.write(`
+    <html>
+      <head>
+        <title>Recibo ${recibo.id}</title>
+        <style>
+          body { font-family: Arial; padding: 30px; }
+          h2, h3, p { text-align: center; }
+          .line { margin: 10px 0; }
+        </style>
+      </head>
+      <body>
+        <h3>INSTITUTO EDUCATIVO</h3>
+        <h2>NUEVA AMERICA</h2>
+        <p>NIT: 800008061-8</p>
+        <p>Nuevo Bosque Mz 52 Lt 02 etapa 7</p>
+        <p>Cartagena, Bolívar.</p>
+        <p>Tel. 605 6654780</p>
+
+        <h2>RECIBO DE PAGO</h2>
+        <div class="line"><strong>ID:</strong> ${recibo.id}</div>
+        <div class="line"><strong>Estudiante:</strong> ${recibo.estudianteDoc}</div>
+        <div class="line"><strong>Concepto:</strong> ${recibo.notas}</div>
+        <div class="line"><strong>Monto:</strong> $${recibo.monto}</div>
+        <div class="line"><strong>Método:</strong> ${recibo.metodo}</div>
+        <div class="line"><strong>Monto Numero de aprobación:</strong> $${recibo.numeroAprobacion}</div>
+        <div class="line"><strong>Fecha:</strong> ${new Date().toLocaleString()}</div>
+        <div class="line"><strong>Responsable:</strong> ${usuario?.split('@')[0]}</div>
+
+        <script>
+          window.onload = function() {
+            window.print();
+            window.onafterprint = function() {
+              window.close();
+            }
+          }
+        <\/script>
+      </body>
+    </html>
+  `);
+    }
+
+    ventana.document.close();  
+  }
 }
