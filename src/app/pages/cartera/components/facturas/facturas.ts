@@ -64,7 +64,7 @@ export class Facturas implements OnInit {
       }
 
       this.estudiantesFiltrados = this.lista.filter((est) =>
-        est.nombres.toLowerCase().includes(valor.toLowerCase()),
+        est.nombres.toLowerCase().includes(valor.toLowerCase()) || est.apellidos.toLowerCase().includes(valor.toLowerCase()),
       );
 
       this.mostrarSugerencias = this.estudiantesFiltrados.length > 0;
