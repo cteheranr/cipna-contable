@@ -1,0 +1,241 @@
+<div class="container">
+  <header class="header">
+    <h1 class="title">Nuevo recibo de Venta</h1>
+  </header>
+  <div class="form-content">
+    <div class="pos-container">
+      <div class="header">
+        <p>Complete los datos para generar el comprobante oficial.</p>
+      </div>
+
+      <form [formGroup]="ventaForm" class="venta-grid">
+        <div class="form-section">
+          <div class="card">
+            <h3><i class="fas fa-user-graduate"></i> Información del Estudiante</h3>
+            <div class="input-group">
+              <label>Nombre del estudiante</label>
+              <input
+                type="text"
+                formControlName="estudianteDoc"
+              />
+            </div>
+
+            <div class="input-group">
+              <label>Concepto de Pago</label>
+              <select formControlName="concepto">
+                <option value="">Seleccione un concepto...</option>
+                <option value="pension">Acuerdos de pago años anteriores</option>
+                <option value="pension">Formularios de Inscripción</option>
+                <option value="matricula">Matrícula</option>
+                <option value="otros">Otros Servicios / Certificados</option>
+              </select>
+            </div>
+
+            <div class="input-group">
+              <label>Observaciones</label>
+              <textarea
+                formControlName="notas"
+                rows="2"
+                placeholder="Ej: Pago de certificado de nota 6° del año 2016"
+              ></textarea>
+            </div>
+          </div>
+        </div>
+
+        <div class="summary-section">
+          <div class="card total-card">
+            <h3>Resumen de Cobro</h3>
+            <div class="total-row">
+              <span>Subtotal:</span>
+              <span>{{ ventaForm.value.monto | currency }}</span>
+            </div>
+            <div class="total-row highlight">
+              <span>TOTAL A PAGAR:</span>
+              <span>{{ ventaForm.value.monto | currency }}</span>
+            </div>
+
+            <div class="input-group">
+              <label>Monto a Recibir ($)</label>
+              <input type="number" formControlName="monto" class="monto-input" />
+            </div>
+
+            <div class="input-group">
+              <label>Método de Pago</label>
+              <div class="payment-methods">
+                <label
+                  ><input type="radio" formControlName="metodo" value="efectivo" /> Efectivo</label
+                >
+                <label
+                  ><input type="radio" formControlName="metodo" value="transferencia" />
+                  Transferencia</label
+                >
+                <label
+                  ><input type="radio" formControlName="metodo" value="datafono" /> Datafono</label
+                >
+                <label><input type="radio" formControlName="metodo" value="mixto" /> Mixto</label>
+              </div>
+            </div>
+
+            @if (
+              ventaForm.get('metodo')?.value === 'transferencia' ||
+              ventaForm.get('metodo')?.value === 'datafono'
+            ) {
+              <div class="input-group">
+                <label>Numero de aprobación</label>
+                <input formControlName="numeroAprobacion" rows="2" placeholder="Ej: MT0123123" />
+              </div>
+            }
+
+            @if (ventaForm.get('metodo')?.value === 'mixto') {
+              <div class="input-group">
+                <label>Método de Pago 1</label>
+                <div class="payment-methods">
+                  <label
+                    ><input type="radio" formControlName="metodo1" value="efectivo" />
+                    Efectivo</label
+                  >
+                  <label
+                    ><input type="radio" formControlName="metodo1" value="transferencia" />
+                    Transferencia</label
+                  >
+                  <label
+                    ><input type="radio" formControlName="metodo1" value="datafono" />
+                    Datafono</label
+                  >
+                </div>
+              </div>
+              @if (ventaForm.get('metodo1')?.value === 'efectivo') {
+                <div class="input-group">
+                  <label>Monto recibido</label>
+                  <input type="number" formControlName="monto1" />
+                </div>
+              }
+              @if (ventaForm.get('metodo1')?.value === 'transferencia') {
+                <div class="input-group">
+                  <label>Monto recibido</label>
+                  <input type="number" formControlName="monto1" />
+                </div>
+                <div class="input-group">
+                  <label>Numero de aprobación</label>
+                  <input formControlName="numeroAprobacion1" rows="2" placeholder="Ej: MT0123123" />
+                </div>
+              }
+              @if (ventaForm.get('metodo1')?.value === 'datafono') {
+                <div class="input-group">
+                  <label>Monto recibido</label>
+                  <input type="number" formControlName="monto1" />
+                </div>
+                <div class="input-group">
+                  <label>Numero de aprobación</label>
+                  <input formControlName="numeroAprobacion1" rows="2" placeholder="Ej: MT0123123" />
+                </div>
+              }
+
+              <div class="input-group">
+                <label>Método de Pago 2</label>
+                <div class="payment-methods">
+                  <label
+                    ><input type="radio" formControlName="metodo2" value="efectivo" />
+                    Efectivo</label
+                  >
+                  <label
+                    ><input type="radio" formControlName="metodo2" value="transferencia" />
+                    Transferencia</label
+                  >
+                  <label
+                    ><input type="radio" formControlName="metodo2" value="datafono" />
+                    Datafono</label
+                  >
+                </div>
+              </div>
+              @if (ventaForm.get('metodo2')?.value === 'efectivo') {
+                <div class="input-group">
+                  <label>Monto recibido</label>
+                  <input type="number" formControlName="monto2" />
+                </div>
+              }
+              @if (ventaForm.get('metodo2')?.value === 'transferencia') {
+                <div class="input-group">
+                  <label>Monto recibido</label>
+                  <input type="number" formControlName="monto2" />
+                </div>
+                <div class="input-group">
+                  <label>Numero de aprobación</label>
+                  <input formControlName="numeroAprobacion2" rows="2" placeholder="Ej: MT0123123" />
+                </div>
+              }
+              @if (ventaForm.get('metodo2')?.value === 'datafono') {
+                <div class="input-group">
+                  <label>Monto recibido</label>
+                  <input type="number" formControlName="monto2" />
+                </div>
+                <div class="input-group">
+                  <label>Numero de aprobación</label>
+                  <input formControlName="numeroAprobacion2" rows="2" placeholder="Ej: MT0123123" />
+                </div>
+              }
+            }
+
+            @if (ventaForm.get('metodo')?.value === 'mixto' && addMetodo) {
+              <div class="input-group">
+                <label>Método de Pago 3</label>
+                <div class="payment-methods">
+                  <label
+                    ><input type="radio" formControlName="metodo3" value="efectivo" />
+                    Efectivo</label
+                  >
+                  <label
+                    ><input type="radio" formControlName="metodo3" value="transferencia" />
+                    Transferencia</label
+                  >
+                  <label
+                    ><input type="radio" formControlName="metodo3" value="datafono" />
+                    Datafono</label
+                  >
+                </div>
+              </div>
+              @if (ventaForm.get('metodo3')?.value === 'efectivo') {
+                <div class="input-group">
+                  <label>Monto recibido</label>
+                  <input type="number" formControlName="monto3" />
+                </div>
+              }
+              @if (ventaForm.get('metodo3')?.value === 'transferencia') {
+                <div class="input-group">
+                  <label>Monto recibido</label>
+                  <input type="number" formControlName="monto3" />
+                </div>
+                <div class="input-group">
+                  <label>Numero de aprobación</label>
+                  <input formControlName="numeroAprobacion3" rows="2" placeholder="Ej: MT0123123" />
+                </div>
+              }
+              @if (ventaForm.get('metodo3')?.value === 'datafono') {
+                <div class="input-group">
+                  <label>Monto recibido</label>
+                  <input type="number" formControlName="monto3" />
+                </div>
+                <div class="input-group">
+                  <label>Numero de aprobación</label>
+                  <input formControlName="numeroAprobacion3" rows="2" placeholder="Ej: MT0123123" />
+                </div>
+              }
+            }
+
+            @if (ventaForm.get('metodo')?.value === 'mixto' && !addMetodo) {
+              <button class="btn-generate" (click)="agregarMed()">Agregar metodo</button>
+            }
+
+            @if (ventaForm.get('metodo')?.value === 'mixto' && addMetodo) {
+              <button class="btn-generate" (click)="eliminarMed()">Eliminar metodo</button>
+            }
+
+            <button [disabled]="ventaForm.invalid" class="btn-generate" (click)="generarFactura()">
+              <i class="fas fa-print"></i> Generar y Guardar Factura
+            </button>
+          </div>
+        </div>
+      </form>
+    </div>
+  </div>
+</div>

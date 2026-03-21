@@ -9,6 +9,13 @@ export const navIcons: NavbarInterface[] = [
     active: false,
   },
   {
+    routerLink: 'ventas-externas',
+    detalle: 'Generación de recibos de caja y comprobantes.',
+    icon: 'bx bx-file-code',
+    label: 'Ventas externas',
+    active: false,
+  },
+  {
     routerLink: 'pensiones',
     detalle: 'Seguimiento de mensualidades por estudiante.',
     icon: 'bx bx-dashboard',

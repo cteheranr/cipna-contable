@@ -23,6 +23,7 @@ import { Report } from './pages/reportes/components/report/report';
 import { Egresos } from './pages/egresos/egresos';
 import { RepUniformes } from './pages/reportes/components/uniformes/uniformes';
 import { ReportLibro } from './pages/reportes/components/report-libro/report-libro';
+import { VentasExternas } from './pages/cartera/components/ventas-externas/ventas-externas';
 
 export const routes: Routes = [
   {
@@ -70,6 +71,10 @@ export const routes: Routes = [
           {
             path: 'uniformes',
             component: Uniformes,
+          },
+          {
+            path: 'ventas-externas',
+            component: VentasExternas,
           },
         ],
       },
