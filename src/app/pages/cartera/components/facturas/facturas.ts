@@ -217,7 +217,7 @@ export class Facturas implements OnInit {
         <div class="line"><strong>Concepto:</strong> ${recibo.notas}</div>
         <div class="line"><strong>Monto:</strong> $${recibo.monto}</div>
         <div class="line"><strong>Método:</strong> ${recibo.metodo}</div>
-        <div class="line"><strong>Monto Numero de aprobación:</strong> $${recibo.numeroAprobacion}</div>
+        <div class="line"><strong>Numero de aprobación:</strong> ${recibo.numeroAprobacion}</div>
         <div class="line"><strong>Fecha:</strong> ${new Date().toLocaleString()}</div>
         <div class="line"><strong>Responsable:</strong> ${usuario?.split('@')[0]}</div>
 
