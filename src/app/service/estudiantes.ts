@@ -10,14 +10,13 @@ import {
   query, // Importante añadir query
   CollectionReference,
 } from '@angular/fire/firestore';
-import { Observable } from 'rxjs';
+import { map, Observable, of } from 'rxjs';
 import { Estudiante } from '../shared/models/estudiantes.model';
 
 @Injectable({
   providedIn: 'root',
 })
 export class StudentService {
-  
   private firestore: Firestore = inject(Firestore);
 
   private get collectionRef() {
@@ -42,6 +41,26 @@ export class StudentService {
     return deleteDoc(studentDocRef);
   }
 
+  search(termino: string): Observable<Estudiante[]> {
+    if (!termino.trim() || termino.length < 3) {
+      return of([]); // Retorna array vacío si la búsqueda es muy corta
+    }
+
+    const termLower = termino.toLowerCase();
+
+
+    return collectionData(this.collectionRef, { idField: 'id' }).pipe(
+      map(
+        (students: any[]) =>
+          students
+            .filter(
+              (s) =>
+                s.nombres.toLowerCase().includes(termLower) ||
+                s.apellidos.toLowerCase().includes(termLower) ||
+                s.numeroDocumento.includes(termino),
+            )
+            .slice(0, 10),
+      ),
+    );
+  }
 }
-
-

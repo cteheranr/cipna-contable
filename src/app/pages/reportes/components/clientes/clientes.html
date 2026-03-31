@@ -1,1 +1,112 @@
-<app-construccion></app-construccion>
+<div class="report-container">
+  <header class="header">
+    <div class="title-section">
+      <h2><i class="fas fa-user-chart"></i> Reporte Detallado por Cliente</h2>
+      <p>Consulte el historial financiero y saldos de cada estudiante.</p>
+    </div>
+  </header>
+
+  <div class="card search-card">
+    <div class="search-box">
+      <i class="fas fa-search"></i>
+      <input type="text" 
+             [(ngModel)]="terminoBusqueda" 
+             (input)="buscarEstudiante()" 
+             placeholder="Buscar por nombre o número de documento...">
+      
+      @if (resultadosBusqueda.length > 0) {
+        <ul class="results-dropdown">
+          @for (est of resultadosBusqueda; track est.id) {
+            <li (click)="seleccionarEstudiante(est)">
+              <div class="est-info">
+                <strong>{{ est.nombres }} {{ est.apellidos }}</strong>
+                <span>{{ est.numeroDocumento }} • {{ est.grado }}</span>
+              </div>
+              <i class="fas fa-chevron-right"></i>
+            </li>
+          }
+        </ul>
+      }
+    </div>
+  </div>
+
+  @if (clienteSeleccionado) {
+    <div class="metrics-grid">
+      <div class="card stat-card">
+        <div class="icon-circle blue"><i class="fas fa-shopping-cart"></i></div>
+        <div class="info">
+          <span>Total Compras</span>
+          <h3>{{ stats.totalVentas | currency }}</h3>
+        </div>
+      </div>
+      <div class="card stat-card">
+        <div class="icon-circle green"><i class="fas fa-check-double"></i></div>
+        <div class="info">
+          <span>Total Pagado</span>
+          <h3>{{ stats.totalPagado | currency }}</h3>
+        </div>
+      </div>
+      <div class="card stat-card">
+        <div class="icon-circle red"><i class="fas fa-exclamation-circle"></i></div>
+        <div class="info">
+          <span>Saldo Pendiente</span>
+          <h3 class="text-danger">{{ stats.totalVentas - stats.totalPagado | currency }}</h3>
+        </div>
+      </div>
+    </div>
+
+    <div class="card table-card">
+      <div class="table-header">
+        <h3>Historial de Movimientos</h3>
+        <button class="btn-export" (click)="exportarPDF()">
+          <i class="fas fa-file-pdf"></i> Exportar Estado de Cuenta
+        </button>
+      </div>
+      
+      <table class="modern-table">
+        <thead>
+          <tr>
+            <th>Fecha</th>
+            <th>Concepto / Pedido</th>
+            <th>Valor Total</th>
+            <th>Abonado</th>
+            <th>Saldo</th>
+            <th>Estado</th>
+            <th>Acciones</th>
+          </tr>
+        </thead>
+        <tbody>
+          @for (mov of historial; track mov.id) {
+            <tr>
+              <td>{{ mov.fecha | date:'dd/MM/yyyy' }}</td>
+              <td>
+                <div class="concepto">
+                  <strong>#{{ mov.numeroPedido }}</strong>
+                  <span>{{ mov.tipo }}</span>
+                </div>
+              </td>
+              <td>{{ mov.total | currency }}</td>
+              <td class="text-success">{{ mov.pagado | currency }}</td>
+              <td [class.has-debt]="mov.total - mov.pagado > 0">
+                {{ mov.total - mov.pagado | currency }}
+              </td>
+              <td>
+                <span class="badge" [ngClass]="mov.total - mov.pagado === 0 ? 'bg-success' : 'bg-warning'">
+                  {{ mov.total - mov.pagado === 0 ? 'Paz y Salvo' : 'Pendiente' }}
+                </span>
+              </td>
+              <td>
+                <button class="btn-icon" ><i class="bx bx-eye"></i></button>
+              </td>
+            </tr>
+          }
+        </tbody>
+      </table>
+    </div>
+  } @else {
+    <div class="empty-state">
+      <img src="assets/img/search-animate.svg" alt="Esperando búsqueda">
+      <p>Seleccione un estudiante para generar el reporte detallado.</p>
+    </div>
+  }
+</div>
