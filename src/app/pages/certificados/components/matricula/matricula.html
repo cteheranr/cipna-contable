@@ -1,0 +1,167 @@
+<div class="certificate-wrapper">
+  <div class="control-panel card">
+    <h3>Configuración</h3>
+    <div class="input-group">
+      <label>Tipo de Trámite</label>
+      <select [(ngModel)]="tipoCertificado">
+        <option value="estudio">Certificado de Estudio</option>
+        <option value="pazysalvo">Paz y Salvo</option>
+      </select>
+    </div>
+    <div class="input-group">
+      <label>Buscar Estudiante</label>
+      <input type="text" [(ngModel)]="busqueda" (input)="buscar()" placeholder="Nombre o Doc..." />
+      @if (estudiantesFiltrados.length > 0) {
+        <ul class="results-dropdown">
+          @for (est of estudiantesFiltrados; track est.id) {
+            <li (click)="seleccionarEstudiante(est)">
+              <strong>{{ est.nombres }} {{ est.apellidos }}</strong>
+              <span>Doc: {{ est.numeroDocumento }}</span>
+            </li>
+          }
+        </ul>
+      }
+    </div>
+    <div class="input-group">
+      <label>Sexo</label>
+      <select [(ngModel)]="sexoEstudiante">
+        <option value="null">Seleccione un sexo...</option>
+        <option value="Mas">Masculino</option>
+        <option value="Fem">Femenino</option>
+      </select>
+    </div>
+
+    <div class="input-group">
+      <label>Grado</label>
+      <select [(ngModel)]="gradoEstudiante">
+        <option value="-2">Pre-jardín</option>
+        <option value="-1">jardín</option>
+        <option value="0">Transición</option>
+        <option value="1">1°</option>
+        <option value="2">2°</option>
+        <option value="3">3°</option>
+        <option value="4">4°</option>
+        <option value="5">5°</option>
+        <option value="6">6°</option>
+        <option value="7">7°</option>
+        <option value="8">8°</option>
+        <option value="9">9°</option>
+        <option value="10">10°</option>
+        <option value="11">11°</option>
+      </select>
+    </div>
+
+    @if (!display) {
+      <button class="btn-primary" (click)="mostrarVista()">
+        <i class="fas fa-file-pdf"></i> Ver vista previa
+      </button>
+    } @else {
+      <button class="btn-primary" (click)="generarCertificado()">
+        <i class="fas fa-file-pdf"></i> Descargar Documento
+      </button>
+    }
+  </div>
+
+  @if (display) {
+    <div id="certificado-papel" class="page-a4">
+      <div class="watermark-container">
+        <img src="asset/img/iena.png" class="watermark-img" />
+      </div>
+
+      <header class="doc-header">
+        <div class="logo-area">
+          <img src="asset/img/iena.png" alt="Logo Institucional" />
+        </div>
+        <div class="main-info">
+          <h1>INSTITUTO EDUCATIVO NUEVA AMÉRICA</h1>
+          <p class="resolucion">
+            Aprobación Oficial por Resolución No. 1499 del 16 de marzo de 2016
+          </p>
+          <p class="resolucion">
+            Secretaria de Educación Distrital de Cartagena de Indias - Bolívar
+          </p>
+          <p class="nit">Nit: 800008061-8 Código DANE #313001000240</p>
+        </div>
+        <div class="control-box">
+          <table class="table-control">
+            <tr>
+              <td>Código</td>
+              <td>FO-DA-04</td>
+            </tr>
+            <tr>
+              <td>Versión</td>
+              <td>00-23</td>
+            </tr>
+            <tr>
+              <td>Fecha</td>
+              <td>MAY-2023</td>
+            </tr>
+            <tr>
+              <td>Página</td>
+              <td>1 de 1</td>
+            </tr>
+          </table>
+        </div>
+      </header>
+
+      <main class="doc-body">
+        <p class="suscritos">
+          LOS SUSCRITOS RECTOR Y SECRETARIA DEL <br />INSTITUTO EDUCATIVO NUEVA AMÉRICA
+        </p>
+
+        <h2 class="title-certify">CERTIFICAN</h2>
+
+        <div class="content-text">
+          <p>
+            Que {{ obtenerTexto }},
+            <strong
+              >{{ estudianteSeleccionado?.nombres }} {{ estudianteSeleccionado?.apellidos }}</strong
+            >, cursó y aprobó en esta institución Educativa el Grado
+            @if (gradoEstudiante === '0') {
+              <strong> Transición </strong>
+            } 
+            @else if (gradoEstudiante === '-1') {
+              <strong> Jardín </strong>
+            } 
+            @else if (gradoEstudiante === '-2') {
+              <strong> Pre-Jardín </strong>
+            } 
+            @else {
+              <strong> {{ gradoEstudiante }}° </strong>
+            }
+            de Educación Básica Secundaria en el año lectivo <strong>{{ anioLectivo }}</strong
+            >, de acuerdo al Plan de estudio contemplado en Nuestro Proyecto Educativo Institucional
+            según Ley 115 y Decreto Reglamentario No. 1290 de 2009 en la jornada de la mañana.
+          </p>
+
+          <p class="constancia">
+            Este certificado se ha expedido sin borrones ni enmendaduras. Para mayor constancia se
+            firma y sella en Cartagena de Indias a los {{ fechaHoy | date: 'dd' }} días del mes de
+            {{ fechaHoy | date: 'MMMM' }} del {{ fechaHoy | date: 'yyyy' }}.
+          </p>
+        </div>
+      </main>
+
+      <footer class="doc-footer">
+        <div class="signature-grid">
+          <div class="signature-box">
+            <div class="signature-line"></div>
+            <p class="name">YOMAIRA THERAN DIAZ</p>
+            <p class="role">Rectora</p>
+          </div>
+          <div class="signature-box">
+            <div class="signature-line"></div>
+            <p class="name">GEORJHANIE BARRIOS L.</p>
+            <p class="role">Secretaria</p>
+          </div>
+        </div>
+
+        <div class="contact-info">
+          <p>DIRECCION: NUEVO BOSQUE MANZANA 52 LOTE 2 7ª ETAPA</p>
+          <p>TELEFONO: 6773463 - E-MAIL: nuevaamerica522@hotmail.com</p>
+          <p>CARTAGENA - COLOMBIA</p>
+        </div>
+      </footer>
+    </div>
+  }
+</div>

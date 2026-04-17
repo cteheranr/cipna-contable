@@ -24,6 +24,9 @@ import { Egresos } from './pages/egresos/egresos';
 import { RepUniformes } from './pages/reportes/components/uniformes/uniformes';
 import { ReportLibro } from './pages/reportes/components/report-libro/report-libro';
 import { VentasExternas } from './pages/cartera/components/ventas-externas/ventas-externas';
+import { Certificados } from './pages/certificados/certificados';
+import { Certificado } from './pages/certificados/components/certificado/certificado';
+import { Matricula } from './pages/certificados/components/matricula/matricula';
 
 export const routes: Routes = [
   {
@@ -85,6 +88,24 @@ export const routes: Routes = [
       {
         path: 'productos',
         component: Productos,
+      },
+      {
+        path: 'certificados',
+        component: Certificados,
+        children: [
+          {
+            path: '',
+            component: Certificado
+          },
+          {
+            path: 'notas',
+            component: Certificado
+          },
+          {
+            path: 'matricula',
+            component: Matricula
+          }
+        ]
       },
       {
         path: 'reportes',

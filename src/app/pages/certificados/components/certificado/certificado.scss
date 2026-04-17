@@ -1,0 +1,122 @@
+// .title {
+//   color: var(--text-color);
+//   padding: 0 0 30px 0;
+// }
+
+// .cartera {
+
+//   display: grid;
+//   gap: 20px;
+
+//   grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+// }
+
+// .card {
+//   background: var(--sidebar-color);
+//   border-radius: 14px;
+//   padding: 20px;
+
+//   box-shadow: 0 5px 15px rgba(0, 0, 0, 0.08);
+
+//   transition: 0.2s;
+//   display: flex;
+//   align-items: center;
+//   flex-direction: column;
+//   justify-content: center;
+//   gap: 20px;
+//   cursor: pointer;
+//   max-width: 250px;
+//   min-height: 130px;
+
+//   i {
+//     color: var(--text-color);
+//     font-size: 30px;
+//   }
+
+//   h3 {
+//     font-size: 14px;
+//     color: var(--text-color);
+//   }
+
+//   &:hover {
+//     transform: translateY(-3px);
+//     box-shadow: 0 10px 25px rgba(0, 0, 0, 0.12);
+//     background: var(--primary-color);
+//     i,
+//     h3 {
+//       color: var(--white-color);
+//     }
+//   }
+// }
+.ventas-dashboard {
+  min-height: 90vh;
+
+  .page-header {
+    margin-bottom: 40px;
+    h1 { color: var(--text-color); font-weight: 800; font-size: 2.2rem; margin: 0; }
+    p { color: var(--text-color); font-size: 1.1rem; margin-top: 8px; }
+  }
+
+  .options-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
+    gap: 25px;
+  }
+
+  .menu-card {
+    background: var(--sidebar-color);
+    border-radius: 24px;
+    padding: 25px;
+    display: flex;
+    align-items: center;
+    gap: 20px;
+    position: relative;
+    cursor: pointer;
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    // box-shadow: 0px 10px 30px rgba(112, 144, 176, 0.08);
+    border: 1px solid transparent;
+
+    &:hover {
+      transform: translateY(-8px);
+      // box-shadow: 0px 20px 40px rgba(112, 144, 176, 0.15);
+      border-color: var(--primary-color); // Borde sutil al hover
+
+      .arrow-indicator {
+        opacity: 1;
+        transform: translateX(0);
+      }
+      
+      .icon-box {
+        transform: scale(1.1);
+      }
+    }
+
+    .icon-box {
+      width: 65px;
+      height: 65px;
+      border-radius: 18px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 1.6rem;
+      transition: transform 0.3s ease;
+
+      // Variantes de colores modernos
+      &.blue { background: var(--body-color); color: var(--primary-color); }
+    }
+
+    .card-content {
+      h3 { color: var(--text-color); font-weight: 700; margin: 0; font-size: 1.2rem; }
+      p { color: var(--text-color); margin: 5px 0 0 0; font-size: 0.9rem; line-height: 1.4; }
+    }
+
+    .arrow-indicator {
+      position: absolute;
+      right: 25px;
+      color: var(--primary-color);
+      opacity: 0;
+      transform: translateX(-10px);
+      transition: all 0.3s ease;
+    }
+  }
+}

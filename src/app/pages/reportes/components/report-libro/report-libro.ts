@@ -69,6 +69,13 @@ export class ReportLibro {
 
         return fechaPedido >= inicio && fechaPedido <= fin;
       });
+
+      this.totalPedidos = this.pedidosFiltrados.length;
+      this.totalRecaudado = this.pedidosFiltrados.reduce((total, pedido) => {
+        return total + (pedido.total || 0);
+      }, 0);
+
+      console.log("Total", this.totalPedidos)
     } else {
       this.pedidosFiltrados = this.AllPedidos;
     }

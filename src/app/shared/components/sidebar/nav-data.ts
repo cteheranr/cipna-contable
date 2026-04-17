@@ -32,6 +32,12 @@ export const navbarData: NavbarInterface[] = [
     active: false,
   },
   {
+    routerLink: 'certificados',
+    icon: 'bx bx-folder-check',
+    label: 'Certificado',
+    active: false,
+  },
+  {
     routerLink: 'reportes',
     icon: 'bx bx-file-report',
     label: 'Reportes',

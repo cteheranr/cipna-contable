@@ -1,0 +1,255 @@
+.certificate-wrapper {
+  display: grid;
+  grid-template-columns: 350px 1fr; // El panel ocupa 350px y el resto la hoja
+  gap: 30px;
+  min-height: 100vh;
+  align-items: start;
+}
+
+.control-panel {
+  background: white;
+  padding: 25px;
+  border-radius: 20px;
+  box-shadow: 0px 18px 40px rgba(112, 144, 176, 0.08);
+  position: sticky;
+  top: 30px; // Se queda fijo mientras haces scroll en la hoja
+
+  h3 {
+    color: #2b3674;
+    font-weight: 800;
+    font-size: 1.2rem;
+    margin-bottom: 25px;
+    border-bottom: 1px solid #f1f4f9;
+    padding-bottom: 15px;
+  }
+
+  .input-group {
+    margin-bottom: 20px;
+
+    label {
+      display: block;
+      color: #2b3674;
+      font-weight: 700;
+      font-size: 0.85rem;
+      margin-bottom: 8px;
+    }
+
+    input,
+    select {
+      width: 100%;
+      padding: 12px 15px;
+      border-radius: 12px;
+      border: 1px solid #e0e5f2;
+      background: #fdfdfd;
+      color: #2b3674;
+      font-size: 0.95rem;
+      transition: all 0.2s ease;
+
+      &:focus {
+        outline: none;
+        border-color: #4318ff;
+        box-shadow: 0px 4px 12px rgba(67, 24, 255, 0.1);
+      }
+
+      &::placeholder {
+        color: #a3aed0;
+      }
+    }
+
+    select {
+      cursor: pointer;
+      appearance: none;
+      background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='24' height='24' viewBox='0 0 24 24' fill='none' stroke='%23a3aed0' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpolyline points='6 9 12 15 18 9'%3E%3C/polyline%3E%3C/svg%3E");
+      background-repeat: no-repeat;
+      background-position: right 10px center;
+      background-size: 18px;
+    }
+  }
+
+  .btn-primary {
+    width: 100%;
+    background: #4318ff;
+    color: white;
+    border: none;
+    padding: 15px;
+    border-radius: 14px;
+    font-weight: 700;
+    font-size: 0.95rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    margin-top: 10px;
+
+    i {
+      font-size: 1.1rem;
+    }
+
+    &:hover {
+      background: #3311cc;
+      box-shadow: 0px 10px 20px rgba(67, 24, 255, 0.2);
+      transform: translateY(-2px);
+    }
+
+    &:active {
+      transform: translateY(0);
+    }
+
+    &:disabled {
+      background: #e0e5f2;
+      color: #a3aed0;
+      cursor: not-allowed;
+      transform: none;
+      box-shadow: none;
+    }
+  }
+}
+
+// Estilo de la "Hoja de Papel" en pantalla
+.page-a4 {
+  width: 210mm;
+  height: 297mm;
+  padding: 25mm 20mm;
+  margin: auto;
+  background: white;
+  position: relative;
+  font-family: 'Century Schoolbook', serif;
+  color: #1a1a1a;
+  box-sizing: border-box;
+  display: flex;
+  flex-direction: column;
+
+  .watermark-container {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    z-index: 0;
+    pointer-events: none;
+
+    .watermark-img {
+      width: 70%; // Ajusta el tamaño según el logo original
+      opacity: 0.08; // Opacidad muy baja para que sea una marca de agua sutil
+    }
+  }
+
+  // IMPORTANTE: Asegúrate de que el contenedor padre tenga z-index relativo
+  .doc-body,
+  .doc-header,
+  .doc-footer {
+    position: relative;
+    z-index: 1; // Esto asegura que el texto quede SIEMPRE por encima del logo
+  }
+
+  .doc-header {
+    display: flex;
+    justify-content: space-between;
+    border-bottom: 2px solid #000;
+    padding-bottom: 10px;
+    z-index: 1;
+
+    .logo-area img {
+      width: 90px;
+    }
+    .main-info {
+      text-align: center;
+      flex: 1;
+      h1 {
+        font-size: 14pt;
+        margin: 0;
+        color: #000;
+        font-weight: bold;
+      }
+      .resolucion {
+        font-size: 8pt;
+        margin: 2px 0;
+      }
+      .nit {
+        font-size: 9pt;
+        font-weight: bold;
+      }
+    }
+    .table-control {
+      font-size: 7pt;
+      border-collapse: collapse;
+      td {
+        border: 1px solid #000;
+        padding: 2px 5px;
+      }
+    }
+  }
+
+  .doc-body {
+    flex: 1;
+    z-index: 1;
+    padding-top: 40px;
+
+    .suscritos {
+      text-align: center;
+      font-weight: bold;
+      font-size: 11pt;
+      margin-bottom: 30px;
+    }
+    .title-certify {
+      text-align: center;
+      font-size: 18pt;
+      letter-spacing: 5px;
+      margin-bottom: 40px;
+    }
+
+    .content-text {
+      font-size: 12pt;
+      line-height: 1.8;
+      text-align: justify;
+      p {
+        margin-bottom: 25px;
+      }
+      strong {
+        text-transform: uppercase;
+      }
+    }
+  }
+
+  .doc-footer {
+    z-index: 1;
+    .signature-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 50px;
+      margin-bottom: 40px;
+      padding: 0 40px;
+    }
+    .signature-box {
+      text-align: center;
+      .signature-line {
+        border-top: 1px solid #000;
+        margin-bottom: 5px;
+      }
+      .name {
+        font-weight: bold;
+        font-size: 10pt;
+        margin: 0;
+      }
+      .role {
+        font-size: 9pt;
+        margin: 0;
+      }
+    }
+    .contact-info {
+      border-top: 1px solid #ccc;
+      padding-top: 10px;
+      text-align: center;
+      font-size: 8pt;
+      color: #666;
+      p {
+        margin: 2px 0;
+      }
+    }
+  }
+}
