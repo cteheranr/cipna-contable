@@ -17,6 +17,8 @@ export class Sidebar {
     private router: Router,
     private activatedRoute: ActivatedRoute,
   ) {}
+
+  isClosed: boolean = true;
   actClass: boolean = false;
   navbarData = navbarData;
 
@@ -28,6 +30,10 @@ export class Sidebar {
     }
 
     this.actClass = !this.actClass;
+  }
+
+  toggleSidebar() {
+    this.isClosed = !this.isClosed;
   }
 
   logout() {

@@ -6,6 +6,48 @@
   width: 250px;
   padding: 10px 14px;
   background: var(--sidebar-color);
+  transition: all 0.3s ease;
+  z-index: 1000;
+
+  @media (min-width: 769px) {
+    &.close {
+      width: 88px;
+      &:hover {
+        width: 250px;
+        .text {
+          opacity: 1;
+        }
+        .toggle-switch {
+          opacity: 1;
+        }
+      }
+      .text {
+        opacity: 0;
+        pointer-events: none;
+      }
+      .toggle-switch {
+        opacity: 0;
+      }
+    }
+  }
+
+  // MÓVIL Y TABLET
+  @media (max-width: 768px) {
+    &.close {
+      width: 88px;
+      .text {
+        opacity: 0;
+        pointer-events: none;
+      }
+      .toggle-switch {
+        opacity: 0;
+      }
+    }
+
+    .toggle-switch {
+      opacity: 1;
+    }
+  }
 
   .image-text {
     display: flex;
@@ -97,6 +139,7 @@
 
     .mode {
       background: var(--primary-color-light);
+      cursor: pointer;
 
       .moon-sun {
         height: 50px;
@@ -145,7 +188,6 @@
         .switch.dark::before {
           left: 25px;
         }
-
       }
     }
   }

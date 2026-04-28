@@ -1,4 +1,4 @@
-<nav class="sidebar">
+<nav class="sidebar" [class.close]="isClosed" >
   <header>
     <div class="image-text">
       <span class="image">
@@ -12,7 +12,7 @@
       </div>
     </div>
 
-    <i class="bx bx-carets-left-right toggle"></i>
+    <i class="bx bx-carets-left-right toggle" (click)="toggleSidebar()"></i>
   </header>
 
   <div class="menu-bar">
@@ -35,7 +35,7 @@
           <span class="text nav-text">Logout</span>
         </a>
       </li>
-      <li class="mode">
+      <li class="mode" (click)="activarClase()">
         <div class="moon-sun">
           <i class="bx bx-moon icon moon"></i>
           <i class="bx bx-sun icon sun"></i>
@@ -43,7 +43,7 @@
         <span class="mode-text text">Dark Mode</span>
 
         <div class="toggle-switch">
-          <span class="switch" [ngClass]="{ dark: actClass }" (click)="activarClase()"></span>
+          <span class="switch" [ngClass]="{ dark: actClass }"></span>
         </div>
       </li>
     </div>

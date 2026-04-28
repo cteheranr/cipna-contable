@@ -1,13 +1,33 @@
+@media (max-width: 768px) {
+      .header-section {
+        display: flex;
+        flex-direction: column;
+        gap: 20px;
+      }
+      .search-box{
+        position: absolute;
+        opacity: 0;
+      }
+}
+
 .productos-container {
   padding-bottom: 30px;
+
   .header-section {
     display: flex;
     justify-content: space-between;
     align-items: center;
     margin-bottom: 30px;
 
-    h1 { color: var(--text-color); font-weight: 700; margin: 0; }
-    p { color: var(--text-color); margin: 0; }
+    h1 {
+      color: var(--text-color);
+      font-weight: 700;
+      margin: 0;
+    }
+    p {
+      color: var(--text-color);
+      margin: 0;
+    }
 
     .btn {
       display: flex;
@@ -26,7 +46,10 @@
     font-weight: 600;
     cursor: pointer;
     transition: 0.3s;
-    &:hover { background: #33418f; transform: scale(1.05); }
+    &:hover {
+      background: #33418f;
+      transform: scale(1.05);
+    }
   }
 
   .filters-bar {
@@ -41,10 +64,18 @@
       border-radius: 10px;
       display: flex;
       align-items: center;
-      box-shadow: 0 4px 6px -1px rgba(0,0,0,0.1);
+      box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
       flex: 1;
-      i { color: #a3aed0; margin-right: 10px; }
-      input { border: none; outline: none; width: 100%; color: var(--primary-color); }
+      i {
+        color: #a3aed0;
+        margin-right: 10px;
+      }
+      input {
+        border: none;
+        outline: none;
+        width: 100%;
+        color: var(--primary-color);
+      }
     }
 
     .categories {
@@ -59,7 +90,10 @@
       font-size: 0.85rem;
       cursor: pointer;
       color: var(--text-color);
-      &.active { background: var(--primary-color); color: white; }
+      &.active {
+        background: var(--primary-color);
+        color: white;
+      }
     }
   }
 
@@ -83,9 +117,11 @@
     border-radius: 20px;
     overflow: hidden;
     position: relative;
-    box-shadow: 0 10px 15px -3px rgba(0,0,0,0.1);
+    box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1);
     transition: 0.3s;
-    &:hover { transform: translateY(-5px); }
+    &:hover {
+      transform: translateY(-5px);
+    }
 
     .badge {
       position: absolute;
@@ -98,7 +134,10 @@
       font-size: 0.75rem;
       font-weight: 700;
       z-index: 2;
-      &.low-stock { background: #fee2e2; color: #991b1b; }
+      &.low-stock {
+        background: #fee2e2;
+        color: #991b1b;
+      }
     }
 
     .img-placeholder {
@@ -107,14 +146,31 @@
       display: flex;
       align-items: center;
       justify-content: center;
-      i { font-size: 3rem; color: #cbd5e1; }
+      i {
+        font-size: 3rem;
+        color: #cbd5e1;
+      }
     }
 
     .card-info {
       padding: 20px;
-      .category-tag { font-size: 0.7rem; color: var(--primary-color); text-transform: uppercase; font-weight: 800; }
-      h3 { margin: 5px 0; font-size: 1.1rem; color: var(--text-color); }
-      .price { font-size: 1.25rem; font-weight: 700; color: var(--primary-color); margin-bottom: 15px; }
+      .category-tag {
+        font-size: 0.7rem;
+        color: var(--primary-color);
+        text-transform: uppercase;
+        font-weight: 800;
+      }
+      h3 {
+        margin: 5px 0;
+        font-size: 1.1rem;
+        color: var(--text-color);
+      }
+      .price {
+        font-size: 1.25rem;
+        font-weight: 700;
+        color: var(--primary-color);
+        margin-bottom: 15px;
+      }
     }
 
     .actions {
@@ -126,8 +182,14 @@
         border: none;
         border-radius: 8px;
         cursor: pointer;
-        &.edit { background: #eff6ff; color: #2563eb; }
-        &.delete { background: #fef2f2; color: #dc2626; }
+        &.edit {
+          background: #eff6ff;
+          color: #2563eb;
+        }
+        &.delete {
+          background: #fef2f2;
+          color: #dc2626;
+        }
       }
     }
   }
@@ -136,8 +198,10 @@
 //MODAL SCSS
 .modal-overlay {
   position: fixed;
-  top: 0; left: 0;
-  width: 100%; height: 100%;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
   background: rgba(0, 0, 0, 0.5);
   backdrop-filter: blur(4px);
   display: flex;
@@ -151,7 +215,7 @@
     max-width: 500px;
     border-radius: 20px;
     overflow: hidden;
-    box-shadow: 0 20px 40px rgba(0,0,0,0.2);
+    box-shadow: 0 20px 40px rgba(0, 0, 0, 0.2);
   }
 
   .modal-header {
@@ -161,25 +225,47 @@
     display: flex;
     justify-content: space-between;
     align-items: center;
-    h3 { margin: 0; font-size: 1.2rem; }
-    .close-btn { background: none; border: none; color: var(--white-color); font-size: 1.5rem; cursor: pointer; }
+    h3 {
+      margin: 0;
+      font-size: 1.2rem;
+    }
+    .close-btn {
+      background: none;
+      border: none;
+      color: var(--white-color);
+      font-size: 1.5rem;
+      cursor: pointer;
+    }
   }
 
   .modal-body {
     padding: 25px;
-    .row { display: grid; grid-template-columns: 1fr 1fr; gap: 15px; }
+    .row {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 15px;
+    }
   }
 
   .input-field {
     margin-bottom: 15px;
-    label { display: block; margin-bottom: 5px; color: var(--text-color); font-weight: 600; font-size: 0.9rem; }
-    input, select {
+    label {
+      display: block;
+      margin-bottom: 5px;
+      color: var(--text-color);
+      font-weight: 600;
+      font-size: 0.9rem;
+    }
+    input,
+    select {
       width: 100%;
       padding: 10px;
       border: 1px solid #e0e5f2;
       border-radius: 10px;
       outline: none;
-      &:focus { border-color: var(--primary-color); }
+      &:focus {
+        border-color: var(--primary-color);
+      }
     }
   }
 
@@ -189,11 +275,25 @@
     justify-content: flex-end;
     gap: 10px;
     background: var(--sidebar-color);
-    
-    .btn-cancel { background: #e2e8f0; border: none; padding: 10px 20px; border-radius: 10px; cursor: pointer; }
-    .btn-save { 
-      background: var(--primary-color); color: white; border: none; padding: 10px 20px; border-radius: 10px; cursor: pointer;
-      &:disabled { opacity: 0.5; cursor: not-allowed; }
+
+    .btn-cancel {
+      background: #e2e8f0;
+      border: none;
+      padding: 10px 20px;
+      border-radius: 10px;
+      cursor: pointer;
+    }
+    .btn-save {
+      background: var(--primary-color);
+      color: white;
+      border: none;
+      padding: 10px 20px;
+      border-radius: 10px;
+      cursor: pointer;
+      &:disabled {
+        opacity: 0.5;
+        cursor: not-allowed;
+      }
     }
   }
 }

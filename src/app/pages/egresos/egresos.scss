@@ -1,5 +1,4 @@
 .egresos-container {
-
   .header-section {
     margin-bottom: 25px;
     h1 {
@@ -26,6 +25,7 @@
       display: flex;
       align-items: center;
       margin-bottom: 2rem;
+      width: 100%;
 
       h2 {
         font-size: 1.25rem;
@@ -37,11 +37,22 @@
   }
 }
 
-.egresos-form {
-  display: grid;
-  grid-template-columns: repeat(2, 1fr);
-  gap: 1.5rem;
+@media (max-width: 768px) {
+  .egresos-form {
+    display: flex;
+    flex-direction: column;
+  }
+}
 
+@media (min-width: 769px) {
+  .egresos-form {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 1.5rem;
+  }
+}
+
+.egresos-form {
   .form-group {
     display: flex;
     flex-direction: column;
